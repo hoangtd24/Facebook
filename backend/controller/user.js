@@ -1,5 +1,6 @@
 const { validateEmail, validateLength } = require("../helpers/validation");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../helpers/tokens");
 const { sendVerificationEmail } = require("../helpers/mailer");
@@ -8,7 +9,6 @@ exports.register = async (req, res) => {
     const {
       first_name,
       last_name,
-      username,
       email,
       password,
       bYear,
@@ -57,24 +57,82 @@ exports.register = async (req, res) => {
       bDay,
       gender,
     }).save();
-    const emailVerificationToken = createToken({id: user._id}, "30m")
-    const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`
+    const emailVerificationToken = createToken({ id: user._id }, "30m");
+    const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
 
-    sendVerificationEmail(user.email, user.username, url)
-    const token = createToken({id: user._id}, "1d")
+    sendVerificationEmail(user.email, user.username, url);
+    const token = createToken({ id: user._id }, "1d");
     res.send({
       id: user._id,
       username: user.username,
       firstname: user.first_name,
       lastname: user.last_name,
-      email:user.email,
+      email: user.email,
       picture: user.picture,
       verified: user.verified,
       token: token,
-      message: "Đăng kí thành công ! Kích hoạt email của bạn để bắt đầu sử dụng"
-    })
+      message:
+        "Đăng kí thành công ! Kích hoạt email của bạn để bắt đầu sử dụng",
+    });
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+exports.activateAccount = async (req, res) => {
+  try {
+    const { token } = req.body;
+    const user = jwt.verify(token, process.env.TOKEN_SECRET);
+
+    const check = await User.findById(user.id);
+    if (check.verified) {
+      return res.status(400).json({
+        message: "Email đã được kích hoạt",
+      });
+    } else {
+      await User.findByIdAndUpdate(user.id, { verified: true });
+      return res.status(200).json({
+        message: "Email vừa được kích hoạt thành công.",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        message: "Email chưa được đăng kí",
+      });
+    } else {
+      const check = await bcrypt.compare(password, user.password);
+      console.log(check);
+      if (check) {
+        const token = createToken({ id: user._id }, "1d");
+        res.send({
+          id: user._id,
+          username: user.username,
+          firstname: user.first_name,
+          lastname: user.last_name,
+          email: user.email,
+          picture: user.picture,
+          verified: user.verified,
+          token: token,
+          message:
+            "Đăng kí thành công ! Kích hoạt email của bạn để bắt đầu sử dụng",
+        });
+      } else {
+        return res.status(400).json({
+          message: "Mật khẩu không chính xác",
+        });
+      }
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };
