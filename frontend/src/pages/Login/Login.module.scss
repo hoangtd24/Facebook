@@ -1,0 +1,156 @@
+.login {
+}
+
+.login_wrapper {
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  padding: 72px 0 112px 0;
+}
+
+.login_wrap {
+  padding-right: 32px;
+  & > span {
+    font-size: 28px;
+    width: 500px;
+    display: block;
+    line-height: 32px;
+  }
+}
+
+.login_about {
+  margin-top: 40px;
+}
+
+.logo {
+  height: 106px;
+  margin-left: -28px;
+}
+.login_form {
+  height: 456px;
+  width: 396px;
+  max-width: 100%;
+}
+.form {
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login_btn {
+  width: 100%;
+  background-color: var(--blue-color);
+  border-radius: 8px;
+  color: var(--bg-primary);
+  font-size: 20px;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  font-weight: 600;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.forget_password {
+  color: var(--blue-color);
+  font-size: 14px;
+  margin-top: 16px;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration-color: var(--blue-color);
+  }
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  margin: 20px 0;
+  background-color: var(--divider);
+}
+
+.create_account_btn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: var(--green-color);
+  color: var(--bg-primary);
+  font-weight: 600;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.create_page {
+  text-align: center;
+  margin-top: 28px;
+  & > a {
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 739px) {
+  .login_wrapper {
+    flex-direction: column;
+    padding: 0;
+    justify-content: unset;
+  }
+
+  .login_wrap {
+    max-width: 100%;
+  }
+
+  .login_about {
+    display: flex;
+    justify-content: center;
+    margin-top: unset;
+  }
+  .logo {
+    height: 39px;
+    margin-left: unset;
+  }
+
+  .login_wrap {
+    padding-right: unset;
+    & > span {
+      display: none;
+    }
+  }
+
+  .form {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .login_form{
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .login_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    justify-content: unset;
+  }
+
+  .login_wrap {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & > span {
+        text-align: center;
+    }
+  }
+
+  .form {
+    margin-top: 40px;
+  }
+}

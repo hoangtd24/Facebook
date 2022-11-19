@@ -30,12 +30,12 @@ exports.register = async (req, res) => {
     }
     if (!validateLength(first_name, 3, 30)) {
       return res.status(400).json({
-        message: "Chiều dài chuỗi từ 3-30",
+        message: "Chiều dài chuỗi Họ nên từ 3-30",
       });
     }
     if (!validateLength(last_name, 3, 30)) {
       return res.status(400).json({
-        message: "Chiều dài chuỗi từ 3-30",
+        message: "Chiều dài chuỗi Tên nên từ 3-30",
       });
     }
     if (!validateLength(password, 6, 40)) {

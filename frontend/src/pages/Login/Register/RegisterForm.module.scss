@@ -1,0 +1,153 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(183, 183, 183, 0.5);
+}
+
+.register_form {
+  width: 432px;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  background-color: var(--bg-primary);
+  box-shadow: 0 1px 2px var(--shadow-1);
+  border-radius: 8px;
+  color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register_heading {
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+}
+
+.register_title {
+  color: var(--color-secondary);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.exit_icon {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  margin: 10px 0 16px 0;
+  background-color: var(--divider);
+  display: block;
+}
+
+.error{
+  background-color: #be4b49;
+  color: var(--bg-primary);
+  display: block;
+  padding: 8px 16px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.name-wrap {
+  display: flex;
+  margin-bottom: 12px;
+  .custom_input {
+    margin-top: 0;
+    margin-left: 12px;
+  }
+}
+
+.reg_col {
+  margin-top: 16px;
+}
+.reg_line_header {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  color: var(--color-secondary);
+  margin-bottom: 4px;
+
+  & > span {
+    margin-right: 4px;
+  }
+}
+
+.reg_grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select {
+  width: 125px;
+  padding: 8px 0;
+  cursor: pointer;
+  border: 1px solid #dddfe2;
+  border-radius: 4px;
+  outline: none;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  width: 125px;
+  justify-content: space-between;
+  border: 1px solid #dddfe2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+
+  & > label{
+    flex: 1;
+    cursor: pointer;
+  }
+}
+
+.reg_info {
+  font-size: 11px;
+  color: var(--color-secondary);
+  & > span {
+    margin-top: 12px;
+    display: block;
+  }
+}
+
+.reg_info a {
+  color: var(--blue-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.create_account_btn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: var(--green-color);
+  color: var(--bg-primary);
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.success{
+  color: var(--green-color);
+  text-align: center;
+  display: block;
+  margin-top: 12px;
+}
