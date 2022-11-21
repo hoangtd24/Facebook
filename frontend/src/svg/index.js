@@ -21,6 +21,8 @@ import Public from "./public";
 import NewRoom from "./newRoom";
 import Home from "./home";
 import FriendsActive from "./friendsActive";
+import WatchActive from "./watchActive";
+import MarketActive from "./marketActive";
 
 export {
   Logo,
@@ -46,4 +48,6 @@ export {
   NewRoom,
   Home,
   FriendsActive,
+  WatchActive,
+  MarketActive,
 };
