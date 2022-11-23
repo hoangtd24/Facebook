@@ -25,7 +25,7 @@ import WatchActive from "./watchActive";
 import MarketActive from "./marketActive";
 import Group from "./group";
 import GroupActive from "./groupActive";
-
+import ArrowUp from "./arrowUp";
 export {
   Logo,
   HomeActive,
@@ -54,4 +54,5 @@ export {
   MarketActive,
   Group,
   GroupActive,
+  ArrowUp,
 };

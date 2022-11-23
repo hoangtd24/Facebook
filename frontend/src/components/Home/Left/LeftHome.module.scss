@@ -29,3 +29,19 @@
     background-color: transparent;
   }
 }
+
+.divider {
+  height: 1px;
+  margin: 8px 0;
+  background-color: var(--shadow-1);
+}
+
+.shortcuts-title {
+  font-size: 17px;
+  font-weight: 600;
+  padding: 4px 0 8px 0;
+}
+
+.custom-img span{
+    border-radius: 8px;
+}

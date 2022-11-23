@@ -26,6 +26,15 @@ const images = {
   play: require("./play.png"),
   recentad: require("./recentad.png"),
   weather: require("./weather.png"),
+  feed: require("./feed.png"),
+  hdc: require("./hdc.jpg"),
+  mixi: require("./mixi.jpg"),
+  f8: require("./f8.jfif"),
+  react: require("./react.png"),
+  Aphoto: require("./Aphoto.jpg"),
+  mancity: require("./mancity.jpg"),
+  alexd: require("./alexd.jpg"),
+
 };
 
 export default images

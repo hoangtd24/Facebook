@@ -1,4 +1,4 @@
-import images from "../components/icons";
+import images from "../assets/images";
 export const menuList = [
   {
     heading: "Xã hội",

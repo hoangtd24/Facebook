@@ -1,21 +1,13 @@
-import images from "../components/icons";
+import images from "../assets/images";
 export const left = [
   {
-    text: "Find friends",
+    text: "Bạn bè",
     img: images.friends,
   },
   {
-    text: "Memories",
-    img: images.memories,
-  },
-  {
-    text: "Groups",
+    text: "Nhóm",
     img: images.groups,
     notification: "5 new",
-  },
-  {
-    text: "Marketplace",
-    img: images.marketplace,
   },
   {
     text: "Watch",
@@ -23,67 +15,67 @@ export const left = [
     notification: "9 new videos",
   },
   {
-    text: "Saved",
+    text: "Marketplace",
+    img: images.marketplace,
+  },
+  {
+    text: "Kỉ niệm",
+    img: images.memories,
+  },
+  {
+    text: "Đã lưu",
     img: images.saved,
   },
   {
-    text: "Pages",
+    text: "Trang",
     img: images.pages,
   },
   {
-    text: "Events",
+    text: "Sự kiện",
     img: images.events,
   },
   {
-    text: "Ad Center",
+    text: "Trung tâm quảng cáo",
     img: images.ad,
   },
   {
-    text: "Ads Manager",
+    text: "Trình quản lí quảng cáo",
     img: images.ads,
   },
   {
-    text: "Campus",
-    img: images.campus,
-  },
-  {
-    text: "Climate science center",
+    text: "Trung tâm khoa học khí hậu",
     img: images.climate,
-  },
-  {
-    text: "Community Help",
-    img: images.community,
   },
   {
     text: "COVID-19 Information Centrer",
     img: images.covid,
   },
   {
-    text: "Emotional health",
+    text: "Sức khỏe cảm xúc",
     img: images.emotional,
   },
   {
-    text: "Facebook Pay",
+    text: "Đơn đặt hàng và thanh toán",
     img: images.pay,
   },
   {
-    text: "Favorites",
+    text: "Yêu thích",
     img: images.fav,
   },
   {
-    text: "Fundraisers",
+    text: "Chiến dịch gây quỹ",
     img: images.fund,
   },
   {
-    text: "Gaming Video",
+    text: "Video chơi Game",
     img: images.gaming,
   },
   {
-    text: "Jobs",
+    text: "Công việc",
     img: images.jobs,
   },
   {
-    text: "Live videos",
+    text: "Video trực tiếp",
     img: images.live,
   },
   {
@@ -91,23 +83,50 @@ export const left = [
     img: images.messenger,
   },
   {
-    text: "Messenger Kids",
+    text: "Messenger nhí",
     img: images.messkids,
   },
   {
-    text: "Most recent",
+    text: "Gần đây",
     img: images.recent,
   },
   {
-    text: "Play Games",
+    text: "Chơi game",
     img: images.play,
   },
   {
-    text: "Recent ad activity",
-    img: images.recentad,
+    text: "Thời tiết",
+    img: images.weather,
+  },
+];
+
+export const shortcuts = [
+  {
+    src: images.hdc,
+    name: "Báo bóng đá",
   },
   {
-    text: "Weather",
-    img: images.weather,
+    src: images.mixi,
+    name: "Bộ tộc MixiGaming",
+  },
+  {
+    src: images.react,
+    name: "ReactJS Việt Nam",
+  },
+  {
+    src: images.Aphoto,
+    name: "Hội Mê Nhiếp Ảnh - Aphoto",
+  },
+  {
+    src: images.f8,
+    name: "Học lập trình web",
+  },
+  {
+    src: images.mancity,
+    name: "MANCHESTER CITY (FAN)",
+  },
+  {
+    src: images.alexd,
+    name: "Love English w/ AlexD Music Insight",
   },
 ];

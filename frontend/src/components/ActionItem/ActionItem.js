@@ -11,6 +11,7 @@ function ActionItem({
   auto,
   className,
   icon,
+  iconSvg,
   rightIcon,
   name,
   src,
@@ -40,7 +41,11 @@ function ActionItem({
           <i className={cx(icon)}></i>
         </span>
       )}
-
+      {iconSvg && (
+        <span className={cx("circle-icon")}>
+          {iconSvg}
+        </span>
+      )}
       {src && (
         <span className={cx("img")}>
           <img src={src} alt="" />
