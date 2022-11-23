@@ -6,9 +6,9 @@ import Tippy from "@tippyjs/react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";
 import {
-  Friends,
-  FriendsActive,
   Gaming,
+  Group,
+  GroupActive,
   Home,
   HomeActive,
   Logo,
@@ -24,12 +24,18 @@ import {
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { useState } from "react";
+import MenuList from "../Menu/Menu/Menu";
+import UserMenu from "../Menu/UserMenu/UserMenu";
 const color = "#65676b";
 const cx = classNames.bind(styles);
 
 function Header() {
   const { user } = useSelector((state) => state.auth);
   const [visibleSearchBox, setVisibleSearchBox] = useState(false);
+  const [visibleMenu, setVisibleMenu] = useState(false);
+  const [visibleMenuOnMobile, setVisibleMenuOnMobile] = useState(false);
+
+
   console.log(user);
   return (
     <header className={cx("header")}>
@@ -42,10 +48,10 @@ function Header() {
         <HeadlessTippy
           visible={visibleSearchBox}
           interactive
-          placement="right-end"
-          offset={[-10, -314]}
-          hideOnClick={true}
-          trigger="click"
+          getReferenceClientRect={() => ({
+            top: 268,
+            left: 0,
+          })}
           onClickOutside={() => setVisibleSearchBox(false)}
           render={(attrs) => (
             <div className="box" tabIndex="-1" {...attrs}>
@@ -61,6 +67,33 @@ function Header() {
             <input type="text" placeholder="Tìm kiếm trên Facebook" />
           </div>
         </HeadlessTippy>
+        <div className={cx("header-right_mobile")}>
+          <HeadlessTippy
+            visible={visibleMenuOnMobile}
+            interactive
+            placement="bottom"
+            onClickOutside={() => setVisibleMenuOnMobile(false)}
+            render={(attrs) => (
+              <div className="box" tabIndex="-1" {...attrs}>
+                <MenuList />
+              </div>
+            )}
+          >
+            <div
+              className={cx("circle-icon")}
+              onClick={() => setVisibleMenuOnMobile(true)}
+            >
+              <Menu />
+            </div>
+          </HeadlessTippy>
+          <div className={cx("circle-icon")}>
+            <Messenger />
+          </div>
+          <div className={cx("circle-icon")}>
+            <Notifications />
+          </div>
+          <UserMenu />
+        </div>
       </div>
       <div className={cx("header-middle")}>
         <NavLink
@@ -72,18 +105,6 @@ function Header() {
           </span>
           <span className={cx("active-icon")}>
             <HomeActive />
-          </span>
-        </NavLink>
-        <NavLink
-          to="/groups"
-          className={({ isActive }) => cx("middle-icon", { active: isActive })}
-          end
-        >
-          <span className={cx("icon")}>
-            <Friends color={color} />
-          </span>
-          <span className={cx("active-icon")}>
-            <FriendsActive />
           </span>
         </NavLink>
         <NavLink
@@ -111,6 +132,18 @@ function Header() {
           </span>
         </NavLink>
         <NavLink
+          to="/groups"
+          className={({ isActive }) => cx("middle-icon", { active: isActive })}
+          end
+        >
+          <span className={cx("icon")}>
+            <Group color={color} />
+          </span>
+          <span className={cx("active-icon")}>
+            <GroupActive />
+          </span>
+        </NavLink>
+        <NavLink
           to="/gaming"
           end
           className={({ isActive }) => cx("middle-icon", { active: isActive })}
@@ -119,19 +152,31 @@ function Header() {
         </NavLink>
       </div>
       <div className={cx("header-right")}>
-        <div className={cx("circle-icon")}>
-          <Menu />
-        </div>
+        <HeadlessTippy
+          visible={visibleMenu}
+          interactive
+          placement="bottom"
+          onClickOutside={() => setVisibleMenu(false)}
+          render={(attrs) => (
+            <div className="box" tabIndex="-1" {...attrs}>
+              <MenuList />
+            </div>
+          )}
+        >
+          <div
+            className={cx("circle-icon", {focus: visibleMenu})}
+            onClick={() => setVisibleMenu(!visibleMenu)}
+          >
+            <Menu />
+          </div>
+        </HeadlessTippy>
         <div className={cx("circle-icon")}>
           <Messenger />
         </div>
         <div className={cx("circle-icon")}>
           <Notifications />
         </div>
-        <div
-          className={cx("avatar")}
-          style={{ backgroundImage: `url(${user.picture})` }}
-        ></div>
+        <UserMenu />
       </div>
     </header>
   );

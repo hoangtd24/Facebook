@@ -9,7 +9,7 @@ function SearchBox({ color }) {
         <div className={cx("arrow-left")}>
           <Return color={color} />
         </div>
-        <div className={cx("search")}>
+        <div className={cx("search-box")}>
           <Search color={color} />
           <input type="text" placeholder="Tìm kiếm trên Facebook" />
         </div>

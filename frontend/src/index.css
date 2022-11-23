@@ -46,11 +46,10 @@ a {
   background-color: var(--bg-third);
 }
 
-@keyframes FadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+button{
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
+
+

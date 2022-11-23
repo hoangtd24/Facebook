@@ -1,9 +1,14 @@
-import classNames from "classnames"
-import styles from "./Home.module.scss"
+import classNames from "classnames";
+import LeftHome from "../../components/Home/Left/LeftHome";
+import styles from "./Home.module.scss";
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 function Home() {
-    return  <div>Home</div>;
+  return (
+    <div className={cx("wrapper")}>
+      <LeftHome />
+    </div>
+  );
 }
 
 export default Home;

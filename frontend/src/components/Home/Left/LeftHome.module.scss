@@ -1,0 +1,31 @@
+.wapper {
+  width: 360px;
+  position: fixed;
+  left: 0;
+  top: 56px;
+  height: calc(100vh - 56px);
+  color: var(--color-primary);
+  padding: 16px 10px;
+  z-index: -1;
+  &:hover .home__left::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+}
+
+.home__left {
+  overflow-y: auto;
+  height: 100%;
+}
+.home__left::-webkit-scrollbar {
+  width: 8px;
+}
+.home__left::-webkit-scrollbar-thumb {
+  visibility: hidden;
+  border-radius: 5px;
+  background-color: var(--divider);
+}
+.custom_img {
+  & > span {
+    background-color: transparent;
+  }
+}

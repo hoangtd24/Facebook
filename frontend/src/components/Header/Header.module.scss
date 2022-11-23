@@ -19,6 +19,10 @@
   gap: 10px;
 }
 
+.header-right_mobile {
+  display: none;
+}
+
 .circle {
   width: 40px;
   height: 40px;
@@ -57,7 +61,7 @@
 }
 
 .middle-icon {
-  width: 125px;
+  width: 116px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -106,29 +110,43 @@
   background-color: var(--bg-third);
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  cursor: pointer;
+.focus{
+  fill: var(--blue-color)
 }
 
 // search-box
 .wrapper {
-  min-height: 260px;
-  background-color: red;
+  min-height: 256px;
   cursor: pointer;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   background-color: var(--bg-primary);
   box-shadow: 0 12px 12px var(--shadow-1);
+  transform: translateY(-2px);
 }
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-forth);
+  padding: 10px 32px 10px 10px;
+  border-radius: 50px;
+  cursor: text;
 
+  & > input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background-color: transparent;
+  }
+
+  & > input::placeholder {
+    transform: translateY(1px);
+  }
+}
 .header-search-box {
   display: flex;
-  padding: 5px 16px;
+  padding: 8px 16px;
   align-items: center;
   gap: 10px;
 }
@@ -139,4 +157,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .header-middle {
+    margin-left: auto;
+  }
+  .middle-icon {
+    width: 68px;
+  }
+
+  .search {
+    padding: 12px;
+
+    & input {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 739px) {
+  .header {
+    display: block;
+    height: fit-content;
+  }
+
+  .header-right_mobile {
+    display: flex;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .header-right{
+    display: none;
+  }
+  // .header-left {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   width: 100%;
+  // }
+
+  .header-middle {
+    border-bottom: 3px solid var(--bg-third);
+    display: flex;
+    justify-content: space-between;
+  }
+  .middle-icon {
+    width: 68px;
+  }
+  .search {
+    padding: 12px;
+
+    & input {
+      display: none;
+    }
+  }
+
+  .middle-icon {
+    &.active {
+      height: 56px;
+      border-bottom: 0;
+      border-radius: 0;
+    }
+  }
 }

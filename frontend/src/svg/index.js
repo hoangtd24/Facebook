@@ -23,6 +23,8 @@ import Home from "./home";
 import FriendsActive from "./friendsActive";
 import WatchActive from "./watchActive";
 import MarketActive from "./marketActive";
+import Group from "./group";
+import GroupActive from "./groupActive";
 
 export {
   Logo,
@@ -50,4 +52,6 @@ export {
   FriendsActive,
   WatchActive,
   MarketActive,
+  Group,
+  GroupActive,
 };
