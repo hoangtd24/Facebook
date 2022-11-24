@@ -12,7 +12,7 @@ function LeftHome() {
   const [seeMoreGroup, setSeeMoreGroup] = useState(false);
 
   return (
-    <div className={cx("wapper")}>
+    <div className={cx("wrapper")}>
       <div className={cx("home__left")}>
         <div className={cx("user__info")}>
           <ActionItem src={user.picture} name={user.username} />

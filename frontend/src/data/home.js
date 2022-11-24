@@ -1,3 +1,4 @@
+import storyImages from "../assets/stories";
 import images from "../assets/images";
 export const left = [
   {
@@ -128,5 +129,28 @@ export const shortcuts = [
   {
     src: images.alexd,
     name: "Love English w/ AlexD Music Insight",
+  },
+];
+
+export const stories = [
+  {
+    profile_picture: storyImages.profile1,
+    profile_name: "Elon Musk",
+    image: storyImages.user1,
+  },
+  {
+    profile_picture:storyImages.profile3,
+    profile_name: "The Sopranos",
+    image: storyImages.user3,
+  },
+  {
+    profile_picture: storyImages.profile4,
+    profile_name: "Football World",
+    image: storyImages.user4,
+  },
+  {
+    profile_picture:storyImages.profile5,
+    profile_name: "The Witcher Wild Hunt",
+    image: storyImages.user5,
   },
 ];

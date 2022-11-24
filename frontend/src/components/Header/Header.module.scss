@@ -9,6 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 
 // header left
@@ -56,8 +57,14 @@
 //header-middle
 .header-middle {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
 }
 
 .middle-icon {
@@ -110,8 +117,8 @@
   background-color: var(--bg-third);
 }
 
-.focus{
-  fill: var(--blue-color)
+.focus {
+  fill: var(--blue-color);
 }
 
 // search-box
@@ -162,6 +169,7 @@
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
   .header-middle {
     margin-left: auto;
+    position: relative;
   }
   .middle-icon {
     width: 68px;
@@ -188,19 +196,15 @@
     gap: 8px;
   }
 
-  .header-right{
+  .header-right {
     display: none;
   }
-  // .header-left {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   width: 100%;
-  // }
 
   .header-middle {
     border-bottom: 3px solid var(--bg-third);
     display: flex;
     justify-content: space-between;
+    position: relative;
   }
   .middle-icon {
     width: 68px;

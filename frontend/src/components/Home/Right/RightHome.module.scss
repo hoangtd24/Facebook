@@ -1,0 +1,50 @@
+.wrapper {
+  width: 360px;
+  position: fixed;
+  right: 0;
+  top: 56px;
+  height: calc(100vh - 56px);
+  padding: 16px 10px;
+}
+
+.heading,
+.contact__header-left {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  margin: 16px 0 4px 0;
+  background-color: var(--shadow-1);
+}
+
+.contact__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact__header-right {
+  display: flex;
+}
+.circle-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .wrapper {
+    display: none;
+  }
+}

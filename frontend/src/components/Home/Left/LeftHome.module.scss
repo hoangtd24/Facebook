@@ -1,4 +1,4 @@
-.wapper {
+.wrapper {
   width: 360px;
   position: fixed;
   left: 0;
@@ -6,7 +6,6 @@
   height: calc(100vh - 56px);
   color: var(--color-primary);
   padding: 16px 10px;
-  z-index: -1;
   &:hover .home__left::-webkit-scrollbar-thumb {
     visibility: visible;
   }
@@ -42,6 +41,12 @@
   padding: 4px 0 8px 0;
 }
 
-.custom-img span{
-    border-radius: 8px;
+.custom-img span {
+  border-radius: 8px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .wrapper {
+    display: none;
+  }
 }
