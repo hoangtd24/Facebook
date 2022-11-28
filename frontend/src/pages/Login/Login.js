@@ -24,7 +24,6 @@ function Login() {
           password,
         })
       );
-      console.log(result)
       if (result.payload.token) {
         navigate("/");
       }
@@ -65,7 +64,7 @@ function Login() {
                 Đăng nhập
               </button>
             </form>
-            <Link to="/" className={cx("forget_password")}>
+            <Link to="/forget" className={cx("forget_password")}>
               Quên mật khẩu?
             </Link>
             <span className={cx("divider")}></span>

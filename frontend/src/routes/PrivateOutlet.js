@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
-import Login from "../pages/Login/Login";
+import { Navigate} from "react-router-dom";
 
 function PrivateOutlet({ children }) {
   const { user } = useSelector((state) => state.auth);

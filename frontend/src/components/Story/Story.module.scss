@@ -5,6 +5,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.story-mobile {
+  display: none;
+}
 .create-story {
   width: 116px;
   height: 200px;
@@ -129,8 +133,8 @@
   padding: 4px;
   border-radius: 50%;
   background-color: var(--blue-color);
-  position: relative;
-  top: -190px;
+  position: absolute;
+  top: 12px;
   left: 12px;
   display: inline-flex;
 }
@@ -144,8 +148,8 @@
 }
 
 .story_user {
-  position: relative;
-  top: -67px;
+  position: absolute;
+  bottom: 16px;
   display: flex;
   font-size: 12px;
   font-weight: 600;
@@ -172,5 +176,27 @@
   .story {
     width: 130px;
     height: 230px;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .create-story,
+  .story {
+    width: 130px;
+    height: 230px;
+  }
+
+  .create-story + .create-story {
+    margin-left: 10px;
+  }
+
+  .right-btn {
+    display: none;
+  }
+  .story-mobile {
+    display: block;
+  }
+  .story-wrap {
+    display: none;
   }
 }

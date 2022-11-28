@@ -39,7 +39,11 @@ const authSlice = createSlice({
     user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
     error: {},
   },
-  reducers: {},
+  reducers: {
+    logOut: (state, action) => {
+      state.user = {}
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -57,5 +61,5 @@ const authSlice = createSlice({
     });
   },
 });
-
+export const {logOut} = authSlice.actions
 export default authSlice.reducer;

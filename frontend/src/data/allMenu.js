@@ -288,8 +288,4 @@ export const userMenu = [
     name: "Đóng góp ý kiến",
     icon: "report_filled_icon",
   },
-  {
-    name: "Đăng xuất",
-    icon: "logout_filled_icon",
-  },
 ];

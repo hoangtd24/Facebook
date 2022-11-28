@@ -44,7 +44,24 @@
 .custom-btn {
   padding: 0px;
   justify-content: center;
+  font-size: 2rem;
   & > span {
     background-color: transparent;
+  }
+}
+
+@media (max-width: 740px) {
+  .custom-btn {
+    padding: 0px;
+    justify-content: center;
+    & > span {
+      font-size: 11px;
+      background-color: transparent;
+    }
+
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

@@ -1,10 +1,13 @@
 import HeadlessTippy from "@tippyjs/react/headless";
 import classNames from "classnames/bind";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { userMenu } from "../../../data/allMenu";
 import ActionItem from "../../ActionItem/ActionItem";
 import styles from "./UserMenu.module.scss";
+import Cookies from "js-cookie";
+import { logOut } from "../../../features/auth/authSlice";
 
 const cx = classNames.bind(styles);
 function UserMenu() {
@@ -12,6 +15,14 @@ function UserMenu() {
   const [history, setHistory] = useState([{ data: userMenu }]);
   const [visibleUserMenu, setVisibleUserMenu] = useState(false);
   const current = history[history.length - 1];
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const logOutUser = () => {
+    dispatch(logOut())
+    Cookies.set("user", "")
+    navigate("/login")
+  }
   return (
     <HeadlessTippy
       visible={visibleUserMenu}
@@ -19,7 +30,7 @@ function UserMenu() {
       placement="bottom"
       onClickOutside={() => {
         setVisibleUserMenu(false);
-        setHistory((prev) => prev.slice(0, 1))
+        setHistory((prev) => prev.slice(0, 1));
       }}
       render={(attrs) => (
         <div className="box" tabIndex="-1" {...attrs}>
@@ -64,6 +75,7 @@ function UserMenu() {
                   );
                 }
               })}
+              <ActionItem icon="logout_filled_icon" name="Đăng xuất" onClick={logOutUser}/>
             </div>
           </div>
         </div>
