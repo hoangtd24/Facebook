@@ -114,7 +114,7 @@ exports.login = async (req, res) => {
     } else {
       const check = await bcrypt.compare(password, user.password);
       if (check) {
-        const token = createToken({ id: user._id }, "1d");
+        const token = createToken({ id: user._id }, "2d");
         res.send({
           id: user._id,
           username: user.username,
@@ -186,10 +186,10 @@ exports.validateCode = async (req, res) => {
     const { email, code } = req.body;
     const user = await User.findOne({ email });
     const dbCode = await Code.findOne({ user: user._id });
-    console.log(dbCode)
+    console.log(dbCode);
     if (dbCode.code === code) {
       return res.status(200).json({
-        message: "ok"
+        message: "ok",
       });
     } else {
       return res.status(400).json({
@@ -201,4 +201,13 @@ exports.validateCode = async (req, res) => {
       message: error.message,
     });
   }
+};
+
+exports.changePassword = async (req, res) => {
+  const { email, password } = req.body;
+  const bcryptPassword = await bcrypt.hash(password, 12);
+  await User.findOneAndUpdate(email, { password: bcryptPassword });
+  return res.status(200).json({
+    message: "ok",
+  });
 };

@@ -53,3 +53,19 @@ button{
 }
 
 
+/* custom emoji picker */
+.epr-emoji-category .epr-hidden-on-search{
+  display: none;
+}
+
+
+@keyframes fadeIn {
+  from{
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

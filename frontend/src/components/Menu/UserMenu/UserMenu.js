@@ -75,7 +75,7 @@ function UserMenu() {
                   );
                 }
               })}
-              <ActionItem icon="logout_filled_icon" name="Đăng xuất" onClick={logOutUser}/>
+              {history.length === 1 && <ActionItem icon="logout_filled_icon" name="Đăng xuất" onClick={logOutUser}/>}
             </div>
           </div>
         </div>

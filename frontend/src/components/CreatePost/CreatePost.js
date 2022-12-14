@@ -3,9 +3,27 @@ import { useSelector } from "react-redux";
 import { Feeling, LiveVideo, Photo } from "../../svg";
 import ActionItem from "../ActionItem/ActionItem";
 import styles from "./CreatePost.module.scss";
+import CreatePostPopup from "../CreatePostPopup/CreatePostPopup";
+import "tippy.js/dist/tippy.css";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  border: "none",
+  outline: "none",
+};
 function CreatePost() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { user } = useSelector((state) => state.auth);
   return (
     <div className={cx("create-post_wrap")}>
@@ -14,7 +32,7 @@ function CreatePost() {
           className={cx("user-avatar")}
           style={{ backgroundImage: `url(${user.picture})` }}
         ></div>
-        <div className={cx("open-post")}>
+        <div className={cx("open-post")} onClick={handleOpen}>
           {user.lastname} ơi, Bạn đang nghĩ gì thế ?
         </div>
       </div>
@@ -36,6 +54,16 @@ function CreatePost() {
           className={cx("custom-btn")}
         />
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <CreatePostPopup handleClose={handleClose}/>
+        </Box>
+      </Modal>
     </div>
   );
 }

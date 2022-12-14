@@ -22,62 +22,46 @@ function ResetPassword({ user, setVisibleResetPassword }) {
     }
   };
   return !visibleVerify ? (
-    <div className={cx("wrapper")}>
-      <header className={cx("header")}>
-        <Link to="/login">
-          <img
-            src="../../icons/facebook.svg"
-            alt="logo"
-            className={cx("logo")}
-          />
-        </Link>
-        <button className={cx("login-btn")}>
-          <Link to="/login">Đăng nhập</Link>
-        </button>
-      </header>
-      <div className={cx("container")}>
-        <div className={cx("content")}>
-          <p className={cx("heading")}>Đặt lại mật khẩu của bạn</p>
-          <span className={cx("divider")}></span>
-          <div className={cx("reset")}>
-            <div className={cx("reset-left")}>
-              <span className={cx("desc")}>
-                Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?
-              </span>
-              <label htmlFor="email">
-                <input
-                  type="radio"
-                  id="email"
-                  checked
-                  className={cx("input")}
-                  onChange={() => {}}
-                />
-                <div className={cx("lable-wrap")}>
-                  <span>Gửi mã qua Email</span>
-                  <span>{user.email}</span>
-                </div>
-              </label>
+    <div className={cx("content")}>
+      <p className={cx("heading")}>Đặt lại mật khẩu của bạn</p>
+      <span className={cx("divider")}></span>
+      <div className={cx("reset")}>
+        <div className={cx("reset-left")}>
+          <span className={cx("desc")}>
+            Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?
+          </span>
+          <label htmlFor="email">
+            <input
+              type="radio"
+              id="email"
+              checked
+              className={cx("input")}
+              onChange={() => {}}
+            />
+            <div className={cx("lable-wrap")}>
+              <span>Gửi mã qua Email</span>
+              <span>{user.email}</span>
             </div>
-            <div className={cx("reset-right")}>
-              <div
-                className={cx("user-avatar")}
-                style={{ backgroundImage: `url(${user.picture})` }}
-              ></div>
-              <p>Người dùng Facebook</p>
-            </div>
-          </div>
-          <div className={cx("group-btn")}>
-            <button
-              className={cx("cancle-btn")}
-              onClick={() => setVisibleResetPassword(false)}
-            >
-              Không phải là bạn ?
-            </button>
-            <button className={cx("search-btn")} onClick={handleSendCode}>
-              Tiếp tục
-            </button>
-          </div>
+          </label>
         </div>
+        <div className={cx("reset-right")}>
+          <div
+            className={cx("user-avatar")}
+            style={{ backgroundImage: `url(${user.picture})` }}
+          ></div>
+          <p>Người dùng Facebook</p>
+        </div>
+      </div>
+      <div className={cx("group-btn")}>
+        <button
+          className={cx("cancle-btn")}
+          onClick={() => setVisibleResetPassword(false)}
+        >
+          Không phải là bạn ?
+        </button>
+        <button className={cx("search-btn")} onClick={handleSendCode}>
+          Tiếp tục
+        </button>
       </div>
     </div>
   ) : (

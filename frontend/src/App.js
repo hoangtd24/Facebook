@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DefaultLayout from "./layout/DefaultLayout";
 import { privateRoutes, publicRoutes } from "./routes";
