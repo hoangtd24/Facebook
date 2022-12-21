@@ -38,28 +38,42 @@ const authSlice = createSlice({
   initialState: {
     user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
     error: {},
+    loading: false,
   },
   reducers: {
     logOut: (state, action) => {
-      state.user = {}
-    }
+      state.user = {};
+    },
   },
   extraReducers: (builder) => {
+    //register
+    builder.addCase(registerUser.pending, (state, action) => {
+      state.loading = true;
+    });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.error = {};
+      state.loading = false;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.error = action.payload;
+      state.loading = false;
+    });
+
+    //login
+    builder.addCase(loginUser.pending, (state, action) => {
+      state.loading = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.error = {};
+      state.loading = false;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.error = action.payload;
+      state.loading = false;
     });
   },
 });
-export const {logOut} = authSlice.actions
+export const { logOut } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,6 +1,7 @@
+import { CircularProgress } from "@mui/material";
 import classNames from "classnames/bind";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InputForm from "../../components/InputForm/InputForm";
 import { loginUser } from "../../features/auth/authSlice";
@@ -9,14 +10,15 @@ import RegisterForm from "./Register/RegisterForm";
 
 const cx = classNames.bind(styles);
 function Login() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const result = await dispatch(
         loginUser({
@@ -82,6 +84,11 @@ function Login() {
         </div>
       </div>
       {visible && <RegisterForm setVisible={setVisible} />}
+      {loading && (
+        <div className={cx("loading")}>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 }
