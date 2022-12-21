@@ -6,3 +6,4 @@ const router = express.Router();
 
 router.post("/uploadImages", imageUpload, uploadImages);
 module.exports = router;
+

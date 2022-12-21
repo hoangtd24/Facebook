@@ -3,8 +3,7 @@ import { useRef, useState } from "react";
 import styles from "./ImagePreview.module.scss";
 
 const cx = classNames.bind(styles);
-function ImagePreview({ setPrev }) {
-  const [images, setImages] = useState([]);
+function ImagePreview({ setPrev, images, setImages }) {
   const inputRef = useRef();
 
   const handlePreviewImage = (e) => {
@@ -41,7 +40,7 @@ function ImagePreview({ setPrev }) {
             )}
           >
             {images.slice(0, 6).map((image, index) => (
-              <div className={cx("img-preview")}>
+              <div className={cx("img-preview")} key={index}>
                 <img src={image} key={index} />
                 {index === 5 && images.length > 6 && (
                   <div className={cx("blur")}>+{images.length - 6}</div>
