@@ -16,11 +16,12 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
+  maxWidth: "100%",
   transform: "translate(-50%, -50%)",
   border: "none",
   outline: "none",
 };
-function CreatePost() {
+function CreatePost({ setChange, change}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -61,7 +62,7 @@ function CreatePost() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreatePostPopup handleClose={handleClose}/>
+          <CreatePostPopup handleClose={handleClose} setChange={setChange} change={change}/>
         </Box>
       </Modal>
     </div>

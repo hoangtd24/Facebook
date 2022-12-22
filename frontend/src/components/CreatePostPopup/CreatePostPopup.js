@@ -26,10 +26,10 @@ const postBackgrounds = [
 ];
 
 const cx = classNames.bind(styles);
-function CreatePostPopup({ handleClose }) {
+function CreatePostPopup({ handleClose, setChange, change }) {
   const { user } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.post);
-  const {loadingUpload} = useSelector(state => state.upload)
+  const { loadingUpload } = useSelector((state) => state.upload);
   const [picker, setPicker] = useState(false);
   const [prev, setPrev] = useState(false);
   const [showBgs, setShowBgs] = useState(false);
@@ -39,7 +39,6 @@ function CreatePostPopup({ handleClose }) {
   const [cursorPosition, setCursorPosition] = useState();
   const textRef = useRef(null);
   const dispatch = useDispatch();
-  console.log(images);
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
     textRef.current.focus();
@@ -75,7 +74,7 @@ function CreatePostPopup({ handleClose }) {
           type: null,
           text: text,
           user: user.id,
-          images: response,
+          images: response.payload,
           token: user.token,
           background: `../../../images/postBackgrounds/${currentBg}.jpg`,
         })
@@ -91,6 +90,7 @@ function CreatePostPopup({ handleClose }) {
         })
       );
     }
+    setChange(!change);
     handleClose();
   };
   return (
@@ -139,6 +139,10 @@ function CreatePostPopup({ handleClose }) {
                   value={text}
                   onChange={(e) => {
                     setText(e.target.value);
+                    if (text.length > 150) {
+                      setCurrentBg(0);
+                      setShowBgs(false);
+                    }
                   }}
                   ref={textRef}
                 ></textarea>
@@ -173,7 +177,7 @@ function CreatePostPopup({ handleClose }) {
                   </span>
                   <div
                     className={cx("no_bg", { active: currentBg === 0 })}
-                    onClick={() => setCurrentBg("noBg")}
+                    onClick={() => setCurrentBg("0")}
                   ></div>
                   {postBackgrounds.map((bg, index) => (
                     <div
@@ -240,7 +244,9 @@ function CreatePostPopup({ handleClose }) {
       </div>
       <AddPost setPrev={setPrev} />
       <button
-        className={cx("submit-btn", { primary: text.length > 0 || images.length > 0 })}
+        className={cx("submit-btn", {
+          primary: text.length > 0 || images.length > 0,
+        })}
         onClick={handlePost}
       >
         Đăng

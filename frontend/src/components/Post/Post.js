@@ -48,8 +48,54 @@ function Post({ post }) {
           </div>
         </div>
         <div className={cx("post_header-right")}>
-          <Dots color="#828387" />
+          <div className={cx("dots_icon")}>
+            <Dots color="#828387" />
+          </div>
+          <div className={cx("add_exit-icon")} onClick={() => setPrev(false)}>
+            <i className={cx("exit_icon")}></i>
+          </div>
         </div>
+      </div>
+      <div className={cx("post_content")}>
+        {post.background === "../../../images/postBackgrounds/0.jpg" ? (
+          <>
+            <span className={cx("post_content_text")}>{post.text}</span>
+            <div
+              className={cx(
+                "add_picture-content",
+                (post.images.length > 2 && post.images.length % 2 === 0) ||
+                  post.images.length > 6
+                  ? "grid_layout-even"
+                  : "",
+                post.images.length > 2 &&
+                  post.images.length <= 6 &&
+                  post.images.length % 2 !== 0
+                  ? "grid_layout-odd"
+                  : ""
+              )}
+            >
+              {post.images.slice(0, 6).map((image, index) => {
+                return (
+                  <div className={cx("img-preview")} key={index}>
+                    <img src={image.url} key={index} />
+                    {index === 5 && post.images.length > 6 && (
+                      <div className={cx("blur")}>
+                        +{post.images.length - 6}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div
+            className={cx("post_bg")}
+            style={{ backgroundImage: `url("${post.background}")` }}
+          >
+            <span className={cx("post_content_text")}>{post.text}</span>
+          </div>
+        )}
       </div>
     </div>
   );

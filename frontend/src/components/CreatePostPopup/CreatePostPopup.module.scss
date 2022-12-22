@@ -1,5 +1,6 @@
 .popup_wrapper {
   width: 500px;
+  max-width: 100%;
   border-radius: 10px;
   background-color: var(--bg-primary);
   box-shadow: 0 12px 20px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2);
@@ -249,7 +250,7 @@
   }
 }
 
-.submit-btn{
+.submit-btn {
   width: calc(100% - 32px);
   font-weight: 600;
   border-radius: 6px;
@@ -262,7 +263,7 @@
   cursor: not-allowed;
 }
 
-.primary{
+.primary {
   background-color: var(--blue-color);
   color: var(--bg-primary);
   cursor: pointer;

@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import LeftHome from "../../components/Home/Left/LeftHome";
@@ -14,17 +14,17 @@ function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.auth);
-  console.log(posts);
+  const [change, setChange] = useState(false);
   useEffect(() => {
     dispatch(getAllPost({ token: user.token }));
-  }, []);
+  }, [change]);
   return (
     <div className={cx("wrapper")}>
       <LeftHome />
       <div className={cx("container")}>
         <div className={cx("content")}>
           <Story />
-          <CreatePost />
+          <CreatePost setChange={setChange} change={change}/>
           <div className={cx("posts")}>
             {posts.map((post, index) => (
               <Post key={index} post={post} />
