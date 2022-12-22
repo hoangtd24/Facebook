@@ -20,11 +20,28 @@ export const createPost = createAsyncThunk(
     }
   }
 );
+
+export const getAllPost = createAsyncThunk("post/getAll", async ({ token }) => {
+  try {
+    const post = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getAllPost`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return post.data;
+  } catch (error) {
+    return error.response.data.message;
+  }
+});
 const postSlice = createSlice({
   name: "post",
   initialState: {
     loading: false,
     message: "",
+    posts: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -34,6 +51,10 @@ const postSlice = createSlice({
     builder.addCase(createPost.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+    });
+
+    builder.addCase(getAllPost.fulfilled, (state, action) => {
+      state.posts = action.payload;
     });
   },
 });
