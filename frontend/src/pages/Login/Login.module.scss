@@ -91,6 +91,11 @@
   }
 }
 
+.error{
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
+}
 @media only screen and (max-width: 739px) {
   .login_wrapper {
     flex-direction: column;

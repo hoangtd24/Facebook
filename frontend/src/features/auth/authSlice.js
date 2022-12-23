@@ -37,7 +37,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
-    error: {},
+    error: "",
     loading: false,
   },
   reducers: {
@@ -66,7 +66,6 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.error = {};
       state.loading = false;
     });
     builder.addCase(loginUser.rejected, (state, action) => {

@@ -132,9 +132,117 @@
   background-repeat: no-repeat;
   height: 350px;
 
-  & .post_content_text{
+  & .post_content_text {
     text-align: center;
     font-size: 24px;
     font-weight: 600;
   }
+}
+
+.post_infos {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+}
+
+.react_count {
+}
+
+.react_count-img {
+}
+
+.react_count-num {
+}
+
+.comment_count {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--color-secondary);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.share_count {
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--color-secondary);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.post_actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 0;
+  margin: 0 16px;
+  border-top: 1px solid var(--bg-third);
+  border-bottom: 1px solid var(--bg-third);
+}
+
+.post_action {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 0;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+  & span {
+    color: var(--color-secondary);
+    font-weight: 600;
+    transform: translateY(-2px);
+  }
+}
+
+.react_popup {
+  display: flex;
+  gap: 4px;
+  background-color: var(--bg-primary);
+  padding: 4px;
+  border-radius: 99px;
+  box-shadow: 0 1px 2px var(--shadow-1);
+}
+
+.react {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.25) translateY(-4px);
+  }
+
+  &:hover .react_name {
+    display: flex;
+  }
+  & img {
+    width: 42px;
+  }
+}
+
+.react_name {
+  position: absolute;
+  top: -16px;
+  font-size: 10px;
+  font-weight: 600;
+  display: none;
+  padding: 0 6px;
+  margin: 0 -6px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  background-color: var(--bg-secondary);
+  color: var(--color-secondary);
 }

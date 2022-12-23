@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./InputForm.module.scss";
 
 const cx = classNames.bind(styles);
-function InputForm({type, placeholder, value, onChange, className, large, small}) {
+function InputForm({type, placeholder, value, onChange, className, large, small, onBlur, onFocus}) {
     const classes = cx("input",{
         [className] : className,
         large,
@@ -15,6 +15,8 @@ function InputForm({type, placeholder, value, onChange, className, large, small}
       className= {classes}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
+      onFocus={onFocus}
     />
   );
 }

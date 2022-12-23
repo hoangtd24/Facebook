@@ -3,6 +3,9 @@ import { Dots, Public } from "../../svg";
 import styles from "./Post.module.scss";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import HeadlessTippy from "@tippyjs/react/headless";
+import { reacts } from "../../data/reacts";
+import CreateComment from "../Comment/CreateComment/CreateComment";
 
 const cx = classNames.bind(styles);
 
@@ -97,6 +100,46 @@ function Post({ post }) {
           </div>
         )}
       </div>
+      <div className={cx("post_infos")}>
+        <div className={cx("react_count")}>
+          <div className={cx("react_count-img")}></div>
+          <div className={cx("react_count-num")}></div>
+        </div>
+        <div className={cx("comment_count")}>4 bình luận</div>
+        <div className={cx("share_count")}>0 lượt chia sẻ</div>
+      </div>
+      <div className={cx("post_actions")}>
+        <HeadlessTippy
+          interactive
+          placement="top-start"
+          render={(attrs) => (
+            <div className="box" tabIndex="-1" {...attrs}>
+              <div className={cx("react_popup")}>
+                {reacts.map((react, index) => (
+                  <div className={cx("react")} key={index}>
+                    <img src={react.icon} alt="" />
+                    <div className={cx("react_name")}>{react.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        >
+          <div className={cx("post_action")}>
+            <i className={cx("like_icon")}></i>
+            <span>Thích</span>
+          </div>
+        </HeadlessTippy>
+        <div className={cx("post_action")}>
+          <i className={cx("comment_icon")}></i>
+          <span>Bình luận</span>
+        </div>
+        <div className={cx("post_action")}>
+          <i className={cx("share_icon")}></i>
+          <span>Chia sẻ</span>
+        </div>
+      </div>
+      <CreateComment />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { uploadImages } from "../../features/upload/uploadSlice";
 import dataURItoBlob from "../../helpers/dataURItoBlob";
 import { ArrowUp } from "../../svg";
 import ImagePreview from "../ImagePreview/ImagePreview";
+import HeadlessTippy from "@tippyjs/react/headless";
 import AddPost from "./AddPost";
 import styles from "./CreatePostPopup.module.scss";
 
@@ -149,16 +150,6 @@ function CreatePostPopup({ handleClose, setChange, change }) {
               </div>
             </div>
             <div className={cx("post_emoji")}>
-              {picker && (
-                <div className={cx("emoji_wrap")}>
-                  <EmojiPicker
-                    onEmojiClick={handleClick}
-                    searchDisabled={true}
-                    height={300}
-                    previewConfig={{ showPreview: false }}
-                  />
-                </div>
-              )}
               {text.length <= 150 && !showBgs && (
                 <img
                   src="../../../icons/colorful.png"
@@ -193,10 +184,29 @@ function CreatePostPopup({ handleClose, setChange, change }) {
                   ))}
                 </>
               )}
-              <i
-                className={cx("emoji_icon_large")}
-                onClick={() => setPicker(!picker)}
-              ></i>
+              <HeadlessTippy
+                visible={picker}
+                interactive
+                placement="top-end"
+                onClickOutside={() => setPicker(false)}
+                render={(attrs) => (
+                  <div className="box" tabIndex="-1" {...attrs}>
+                    <div className={cx("emoji_wrap")}>
+                      <EmojiPicker
+                        onEmojiClick={handleClick}
+                        searchDisabled={true}
+                        height={300}
+                        previewConfig={{ showPreview: false }}
+                      />
+                    </div>
+                  </div>
+                )}
+              >
+                <i
+                  className={cx("emoji_icon_large")}
+                  onClick={() => setPicker(!picker)}
+                ></i>
+              </HeadlessTippy>
             </div>
           </>
         ) : (
