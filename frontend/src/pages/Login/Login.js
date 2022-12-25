@@ -16,7 +16,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
-  const { error } = useSelector((state) => state.auth);
+  const { errorLogin } = useSelector((state) => state.auth);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ function Login() {
                 Đăng nhập
               </button>
             </form>
-            {error && error.message.length > 0 && (
+            {errorLogin && (
               <div className={cx("error")}>
                 Tài khoản hoặc mật khẩu chưa đúng
               </div>

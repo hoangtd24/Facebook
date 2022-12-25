@@ -62,7 +62,7 @@ exports.register = async (req, res) => {
     const emailVerificationToken = createToken({ id: user._id }, "30m");
     const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
 
-    sendVerificationEmail(user.email, user.username, url);
+    await sendVerificationEmail(user.email, user.username, url);
     const token = createToken({ id: user._id }, "1d");
     res.send({
       id: user._id,
@@ -170,7 +170,7 @@ exports.sendResetPasswordCode = async (req, res) => {
       code,
       user: user._id,
     }).save();
-    sendResetCode(user.email, user.last_name, code);
+    await sendResetCode(user.email, user.last_name, code);
     return res.status(200).json({
       message: "Mã đã được gửi tới email của bạn",
     });

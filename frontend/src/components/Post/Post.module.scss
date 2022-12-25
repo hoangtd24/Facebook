@@ -246,3 +246,47 @@
   background-color: var(--bg-secondary);
   color: var(--color-secondary);
 }
+
+//Post menu
+.post_menu {
+  width: 340px;
+  background-color: var(--bg-primary);
+  box-shadow: 1px 0 2px var(--shadow-1);
+  border-radius: 8px;
+  padding: 8px;
+}
+.menu_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+  }
+}
+
+.custom {
+  transform: translateY(-3px);
+}
+
+.menu_item-icon {
+  display: flex;
+}
+
+.menu_item-img{
+  filter: invert(0.3);
+  width: 20px;
+}
+.menu_item-description {
+}
+
+.menu_item-title {
+  font-weight: 600;
+}
+
+.menu_item-subtitle {
+  font-size: 12px;
+}

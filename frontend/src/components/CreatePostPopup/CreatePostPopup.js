@@ -187,7 +187,8 @@ function CreatePostPopup({ handleClose, setChange, change }) {
               <HeadlessTippy
                 visible={picker}
                 interactive
-                placement="top-end"
+                placement="top-start"
+                offset={[-300, 0]}
                 onClickOutside={() => setPicker(false)}
                 render={(attrs) => (
                   <div className="box" tabIndex="-1" {...attrs}>
@@ -196,6 +197,7 @@ function CreatePostPopup({ handleClose, setChange, change }) {
                         onEmojiClick={handleClick}
                         searchDisabled={true}
                         height={300}
+                        width={300}
                         previewConfig={{ showPreview: false }}
                       />
                     </div>
@@ -225,20 +227,31 @@ function CreatePostPopup({ handleClose, setChange, change }) {
                 ></textarea>
               </div>
               <div className={cx("post_emoji-prev")}>
-                {picker && (
-                  <div className={cx("emoji_wrap")}>
-                    <EmojiPicker
-                      onEmojiClick={handleClick}
-                      searchDisabled={true}
-                      height={300}
-                      previewConfig={{ showPreview: false }}
-                    />
-                  </div>
-                )}
-                <i
-                  className={cx("emoji_icon_large")}
-                  onClick={() => setPicker(!picker)}
-                ></i>
+                <HeadlessTippy
+                  visible={picker}
+                  interactive
+                  placement="top-start"
+                  offset={[-300, 0]}
+                  onClickOutside={() => setPicker(false)}
+                  render={(attrs) => (
+                    <div className="box" tabIndex="-1" {...attrs}>
+                      <div className={cx("emoji_wrap")}>
+                        <EmojiPicker
+                          onEmojiClick={handleClick}
+                          searchDisabled={true}
+                          height={300}
+                          width={300}
+                          previewConfig={{ showPreview: false }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                >
+                  <i
+                    className={cx("emoji_icon_large")}
+                    onClick={() => setPicker(!picker)}
+                  ></i>
+                </HeadlessTippy>
               </div>
             </div>
             {/* add picture wrap */}

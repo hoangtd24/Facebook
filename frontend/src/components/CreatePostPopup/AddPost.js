@@ -6,7 +6,7 @@ import styles from "./CreatePostPopup.module.scss";
 
 const cx = classNames.bind(styles);
 
-function AddPost({setPrev}) {
+function AddPost({ setPrev }) {
   return (
     <div className={cx("add_post")}>
       <span className={cx("add_post-title")}>Thêm vào bài viết của bạn</span>

@@ -69,6 +69,7 @@ function CreateComment() {
                     onEmojiClick={handleClick}
                     searchDisabled={true}
                     height={300}
+                    width={300}
                     previewConfig={{ showPreview: false }}
                   />
                 </div>

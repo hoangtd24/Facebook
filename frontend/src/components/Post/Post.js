@@ -6,10 +6,13 @@ import { Link } from "react-router-dom";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { reacts } from "../../data/reacts";
 import CreateComment from "../Comment/CreateComment/CreateComment";
+import PostMenu from "./PostMenu";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function Post({ post }) {
+  const [visiblePostMenu, setVisiblePostMenu] = useState(false);
   return (
     <div className={cx("post")}>
       <div className={cx("post_header")}>
@@ -51,9 +54,22 @@ function Post({ post }) {
           </div>
         </div>
         <div className={cx("post_header-right")}>
-          <div className={cx("dots_icon")}>
-            <Dots color="#828387" />
-          </div>
+          <HeadlessTippy
+            visible={visiblePostMenu}
+            interactive
+            onClickOutside={() => setVisiblePostMenu(false)}
+            placement="bottom-start"
+            offset={[-300,0]}
+            render={(attrs) => (
+              <div className="box" tabIndex="-1" {...attrs}>
+                <PostMenu post={post} />
+              </div>
+            )}
+          >
+            <div className={cx("dots_icon")} onClick={() => setVisiblePostMenu(!visiblePostMenu)}>
+              <Dots color="#828387" />
+            </div>
+          </HeadlessTippy>
           <div className={cx("add_exit-icon")} onClick={() => setPrev(false)}>
             <i className={cx("exit_icon")}></i>
           </div>

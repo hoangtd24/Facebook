@@ -34,7 +34,9 @@ const images = {
   Aphoto: require("./Aphoto.jpg"),
   mancity: require("./mancity.jpg"),
   alexd: require("./alexd.jpg"),
-
+  notice: require("./notice.png"),
+  hide: require("./hide.png"),
+  clock: require("./clock.png"),
 };
 
-export default images
+export default images;

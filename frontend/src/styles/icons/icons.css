@@ -341,7 +341,7 @@
   background-repeat: no-repeat;
   display: inline-block;
 }
-.delete_icon {
+.translate_icon {
   background-image: url("../../../public/icons/icons1.png");
   background-position: 0px -399px;
   background-size: auto;

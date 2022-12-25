@@ -24,7 +24,7 @@ const gender = [
 function RegisterForm({ setVisible }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, error } = useSelector((state) => state.auth);
+  const { user, errorRegister } = useSelector((state) => state.auth);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -70,7 +70,7 @@ function RegisterForm({ setVisible }) {
           <i className="exit_icon"></i>
         </div>
         <span className={cx("divider")}></span>
-        {error.message && <span className={cx("error")}>{error.message}</span>}
+        {errorRegister && <span className={cx("error")}>{errorRegister}</span>}
         <div className={cx("name-wrap")}>
           <InputForm
             type="text"

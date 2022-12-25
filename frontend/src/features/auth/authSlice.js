@@ -37,7 +37,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
-    error: "",
+    errorLogin: "",
+    errorRegister: "",
     loading: false,
   },
   reducers: {
@@ -52,11 +53,11 @@ const authSlice = createSlice({
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.error = {};
+      state.errorRegister = "";
       state.loading = false;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
-      state.error = action.payload;
+      state.errorRegister = action.payload.message;
       state.loading = false;
     });
 
@@ -67,9 +68,10 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.loading = false;
+      state.errorLogin = "";
     });
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.error = action.payload;
+      state.errorLogin = action.payload.message;
       state.loading = false;
     });
   },
