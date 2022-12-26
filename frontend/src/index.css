@@ -26,7 +26,7 @@ a {
   --dark-bg-third: #3a3b3c;
   --dark-color-primary: #242526;
   --dark-color-secondary: #b0b3b8;
-  --blue-color: #1876f2;
+  --blue-color: #2374e1;
   --green-color: #42b72a;
   --light-blue-color: #e7f3ff;
   --border-color: #ccced2;
@@ -46,25 +46,23 @@ a {
   background-color: var(--bg-third);
 }
 
-button{
+button {
   background-color: transparent;
   border: none;
   outline: none;
 }
 
-
 /* custom emoji picker */
-.epr-emoji-category .epr-hidden-on-search{
+.epr-emoji-category .epr-hidden-on-search {
   display: none;
 }
 
-
 @keyframes fadeIn {
-  from{
+  from {
     opacity: 0;
     transform: translateX(500px);
   }
-  to{
+  to {
     opacity: 1;
     transform: translateX(0);
   }

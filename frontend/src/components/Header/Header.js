@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { Link, NavLink } from "react-router-dom";
-import Tippy from "@tippyjs/react";
 
 import HeadlessTippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";

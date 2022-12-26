@@ -7,6 +7,7 @@ const {
   sendResetPasswordCode,
   validateCode,
   changePassword,
+  getProfile,
 } = require("../controller/user");
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.post("/findUser", findUser);
 router.post("/sendResetPasswordCode", sendResetPasswordCode);
 router.post("/validateCode", validateCode);
 router.post("/changePassword", changePassword);
+router.get("/getProfile/:idUser", getProfile);
 
 module.exports = router;

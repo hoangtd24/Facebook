@@ -8,7 +8,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {privateRoutes.map((route, index) => {
+          {publicRoutes.map((route, index) => {
             const Page = route.component;
             let Layout = DefaultLayout;
             if (route.layout) {
@@ -19,14 +19,14 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                    <Layout>
-                      <Page />
-                    </Layout>
+                  <Layout>
+                    <Page />
+                  </Layout>
                 }
               />
             );
           })}
-          {publicRoutes.map((route, index) => {
+          {privateRoutes.map((route, index) => {
             const Page = route.component;
             let Layout = DefaultLayout;
             if (route.layout) {

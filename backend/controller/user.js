@@ -122,6 +122,7 @@ exports.login = async (req, res) => {
           lastname: user.last_name,
           email: user.email,
           picture: user.picture,
+          cover: user.cover,
           verified: user.verified,
           token: token,
           message:
@@ -210,4 +211,14 @@ exports.changePassword = async (req, res) => {
   return res.status(200).json({
     message: "ok",
   });
+};
+
+exports.getProfile = async (req, res) => {
+  try {
+    const { idUser } = req.params;
+    const profile = await User.findById(idUser).select("-password");
+    return res.status(200).json(profile);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };

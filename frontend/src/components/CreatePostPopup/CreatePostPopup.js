@@ -62,7 +62,7 @@ function CreatePostPopup({ handleClose, setChange, change }) {
 
   const handlePost = async () => {
     if (images.length > 0) {
-      const path = `${user.username}/upload images`;
+      const path = `${user.id}/upload_images`;
       const postImages = images.map((image) => dataURItoBlob(image));
       let formData = new FormData();
       formData.append("path", path);

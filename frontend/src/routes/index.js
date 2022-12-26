@@ -8,16 +8,16 @@ import ForgetPassWord from "../pages/ResetPassword/forget/ForgetPassword";
 import Watch from "../pages/Watch/Watch";
 
 const publicRoutes = [
-  { path: "/", component: Home, layout: OnlyHeader },
-  { path: "/profile", component: Profile, layout: OnlyHeader },
-  { path: "/groups", component: Groups, layout: OnlyHeader },
-  { path: "/watch", component: Watch, layout: OnlyHeader },
-  { path: "/market", component: Market, layout: OnlyHeader },
+  { path: "/login", component: Login },
+  { path: "/forget", component: ForgetPassWord },
 ];
 
 const privateRoutes = [
-  { path: "/login", component: Login },
-  { path: "/forget", component: ForgetPassWord },
+  { path: "/", component: Home, layout: OnlyHeader },
+  { path: "/profile/:idUser", component: Profile, layout: OnlyHeader },
+  { path: "/groups", component: Groups, layout: OnlyHeader },
+  { path: "/watch", component: Watch, layout: OnlyHeader },
+  { path: "/market", component: Market, layout: OnlyHeader },
 ];
 
 export { publicRoutes, privateRoutes };
