@@ -21,7 +21,7 @@ const style = {
   border: "none",
   outline: "none",
 };
-function CreatePost({ setChange, change}) {
+function CreatePost({ setChange, change, profile }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -49,11 +49,19 @@ function CreatePost({ setChange, change}) {
           name="Ảnh/video"
           className={cx("custom-btn")}
         />
-        <ActionItem
-          iconSvg={<Feeling color="#f7b928" />}
-          name="Feeling/activity"
-          className={cx("custom-btn")}
-        />
+        {profile ? (
+          <ActionItem
+            icon="lifeEvent_icon"
+            name="Sự kiện trong đời"
+            className={cx("custom-btn")}
+          />
+        ) : (
+          <ActionItem
+            iconSvg={<Feeling color="#f7b928" />}
+            name="Feeling/activity"
+            className={cx("custom-btn")}
+          />
+        )}
       </div>
       <Modal
         open={open}
@@ -62,7 +70,11 @@ function CreatePost({ setChange, change}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreatePostPopup handleClose={handleClose} setChange={setChange} change={change}/>
+          <CreatePostPopup
+            handleClose={handleClose}
+            setChange={setChange}
+            change={change}
+          />
         </Box>
       </Modal>
     </div>

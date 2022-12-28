@@ -6,6 +6,7 @@ const { createToken } = require("../helpers/tokens");
 const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const Code = require("../models/Code");
 const generateCode = require("../helpers/generateCode");
+const Post = require("../models/Post");
 exports.register = async (req, res) => {
   try {
     const {
@@ -217,7 +218,11 @@ exports.getProfile = async (req, res) => {
   try {
     const { idUser } = req.params;
     const profile = await User.findById(idUser).select("-password");
-    return res.status(200).json(profile);
+
+    const posts = await Post.find({ user: profile._id })
+      .populate("user")
+      .sort({ createdAt: -1 });
+    return res.status(200).json({ ...profile.toObject(), posts });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

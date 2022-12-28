@@ -34,19 +34,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getProfile = createAsyncThunk(
-  "getProfile",
-  async (param, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getProfile/${param}`
-      );
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 const authSlice = createSlice({
   name: "auth",
   initialState: {

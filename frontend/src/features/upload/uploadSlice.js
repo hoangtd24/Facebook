@@ -16,7 +16,6 @@ export const uploadImages = createAsyncThunk(
           },
         }
       );
-      console.log(result.data)
       return result.data;
     } catch (error) {
       return error.response.data.message;

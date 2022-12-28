@@ -17,11 +17,13 @@ function Post({ post }) {
     <div className={cx("post")}>
       <div className={cx("post_header")}>
         <div className={cx("post_header-left")}>
-          <img
-            src={post.user.picture}
-            alt=""
-            className={cx("post_user-avatar")}
-          />
+          <Link to={`profile/${post.user._id}`} className={cx("wrap-avatar")}>
+            <img
+              src={post.user.picture}
+              alt=""
+              className={cx("post_user-avatar")}
+            />
+          </Link>
           <div className={cx("update_by")}>
             <div>
               <Link to={`profile/${post.user._id}`}>
@@ -59,14 +61,17 @@ function Post({ post }) {
             interactive
             onClickOutside={() => setVisiblePostMenu(false)}
             placement="bottom-start"
-            offset={[-300,0]}
+            offset={[-300, 0]}
             render={(attrs) => (
               <div className="box" tabIndex="-1" {...attrs}>
                 <PostMenu post={post} />
               </div>
             )}
           >
-            <div className={cx("dots_icon")} onClick={() => setVisiblePostMenu(!visiblePostMenu)}>
+            <div
+              className={cx("dots_icon")}
+              onClick={() => setVisiblePostMenu(!visiblePostMenu)}
+            >
               <Dots color="#828387" />
             </div>
           </HeadlessTippy>

@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { left, shortcuts } from "../../../data/home";
 import { ArrowDown1, ArrowUp } from "../../../svg";
 import ActionItem from "../../ActionItem/ActionItem";
@@ -14,9 +15,9 @@ function LeftHome() {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("home__left")}>
-        <div className={cx("user__info")}>
+        <Link className={cx("user__info")} to={`/profile/${user.id}`}>
           <ActionItem src={user.picture} name={user.username} />
-        </div>
+        </Link>
         {seeMore
           ? left.map((item, index) => (
               <ActionItem

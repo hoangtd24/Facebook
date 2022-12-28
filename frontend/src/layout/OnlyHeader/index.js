@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classNames from "classnames/bind";
 import styles from "./OnlyHeader.module.scss";
 import Header from "../../components/Header/Header.js";
 const cx = classNames.bind(styles);

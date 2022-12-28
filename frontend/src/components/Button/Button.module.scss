@@ -8,9 +8,11 @@
   cursor: pointer;
   border-radius: 6px;
   color: #111;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-third);
+  transition: all 0.2s ease-in;
 
   &:hover {
+    opacity: 0.8;
   }
 }
 

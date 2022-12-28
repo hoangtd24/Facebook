@@ -15,6 +15,7 @@ function Home() {
   const { posts } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.auth);
   const [change, setChange] = useState(false);
+  console.log(posts)
   useEffect(() => {
     dispatch(getAllPost({ token: user.token }));
   }, [change]);
@@ -24,7 +25,7 @@ function Home() {
       <div className={cx("container")}>
         <div className={cx("content")}>
           <Story />
-          <CreatePost setChange={setChange} change={change}/>
+          <CreatePost setChange={setChange} change={change} />
           <div className={cx("posts")}>
             {posts.map((post, index) => (
               <Post key={index} post={post} />
