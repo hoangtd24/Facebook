@@ -7,23 +7,35 @@ import HeadlessTippy from "@tippyjs/react/headless";
 import styles from "./Profile.module.scss";
 import Button from "../../components/Button/Button";
 import { Link, NavLink } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import { Dots } from "../../svg";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import GridView from "./GridView";
 import Post from "../../components/Post/Post";
 import Photos from "./Photos";
 import Friends from "./Friends";
+import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 
 const cx = classNames.bind(styles);
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  maxWidth: "100%",
+  transform: "translate(-50%, -50%)",
+  border: "none",
+  outline: "none",
+};
 function Profile() {
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
   const [visibleMenu, setVisibleMenu] = useState(false);
+  const [open, setOpen] = useState(true);
   const [change, setChange] = useState(false);
   const [gridView, setGridView] = useState(1);
   const param = useParams();
   const dispatch = useDispatch();
-  console.log(profile);
   useEffect(() => {
     dispatch(getProfile(param.idUser));
   }, [param.idUser]);
@@ -75,6 +87,7 @@ function Profile() {
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>
             <div
+              onClick={() => setOpen(true)}
               className={cx("profile_avatar")}
               style={{ backgroundImage: `url("${profile.picture}")` }}
             >
@@ -182,6 +195,16 @@ function Profile() {
           </div>
         </div>
       </div>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+            <UpdateProfile />
+        </Box>
+      </Modal>
     </div>
   );
 }

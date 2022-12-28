@@ -34,6 +34,7 @@ function Friends({ path }) {
             .slice(0, 9)
             .map((img, index) => (
               <div
+                key={index}
                 className={cx("profile_photo-card")}
                 style={{ backgroundImage: `url("${img.url}")` }}
               ></div>

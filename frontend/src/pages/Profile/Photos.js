@@ -30,13 +30,15 @@ function Photos({ path }) {
       </div>
       <div className={cx("profile_card-grid")}>
         {listImage.length > 0 &&
-          listImage.slice(0, 9).map((img, index) => (
-            <div
-              className={cx("profile_photo-card")}
-              style={{ backgroundImage: `url("${img.url}")` }}
-            >
-            </div>
-          ))}
+          listImage
+            .slice(0, 9)
+            .map((img, index) => (
+              <div
+                key={index}
+                className={cx("profile_photo-card")}
+                style={{ backgroundImage: `url("${img.url}")` }}
+              ></div>
+            ))}
       </div>
     </div>
   );
