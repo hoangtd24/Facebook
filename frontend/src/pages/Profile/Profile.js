@@ -31,14 +31,14 @@ function Profile() {
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
   const [visibleMenu, setVisibleMenu] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [change, setChange] = useState(false);
   const [gridView, setGridView] = useState(1);
   const param = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfile(param.idUser));
-  }, [param.idUser]);
+  }, [param.idUser, change]);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("profile_cover")}>
@@ -202,7 +202,7 @@ function Profile() {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style }}>
-            <UpdateProfile />
+            <UpdateProfile open={open} setOpen={setOpen} setChange={setChange}/>
         </Box>
       </Modal>
     </div>

@@ -33,7 +33,7 @@ function Post({ post }) {
               </Link>
               <span className={cx("post_type")}>
                 {post.type === "profilePicture" &&
-                  `đã cập nhập ảnh đại diện của ${
+                  ` đã cập nhập ảnh đại diện của ${
                     post.user.gender === "male" ? "anh" : "cô"
                   } ấy`}
               </span>
@@ -87,24 +87,16 @@ function Post({ post }) {
             <div
               className={cx(
                 "add_picture-content",
-                (post.images.length > 2 && post.images.length % 2 === 0) ||
-                  post.images.length > 6
-                  ? "grid_layout-even"
-                  : "",
-                post.images.length > 2 &&
-                  post.images.length <= 6 &&
-                  post.images.length % 2 !== 0
-                  ? "grid_layout-odd"
-                  : ""
+                `grid_layout_${post.images.length < 6 ? post.images.length : 5}`
               )}
             >
-              {post.images.slice(0, 6).map((image, index) => {
+              {post.images.slice(0, 5).map((image, index) => {
                 return (
                   <div className={cx("img-preview")} key={index}>
                     <img src={image.url} key={index} />
-                    {index === 5 && post.images.length > 6 && (
+                    {index === 4 && post.images.length > 5 && (
                       <div className={cx("blur")}>
-                        +{post.images.length - 6}
+                        +{post.images.length - 5}
                       </div>
                     )}
                   </div>

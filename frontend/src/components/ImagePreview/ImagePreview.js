@@ -30,20 +30,14 @@ function ImagePreview({ setPrev, images, setImages }) {
           <div
             className={cx(
               "add_picture-content",
-              (images.length > 2 && images.length % 2 === 0) ||
-                images.length > 6
-                ? "grid_layout-even"
-                : "",
-              images.length > 2 && images.length <= 6 && images.length % 2 !== 0
-                ? "grid_layout-odd"
-                : ""
+              `grid_layout_${images.length < 6 ? images.length : 5}`
             )}
           >
-            {images.slice(0, 6).map((image, index) => (
+            {images.slice(0, 5).map((image, index) => (
               <div className={cx("img-preview")} key={index}>
                 <img src={image} key={index} />
-                {index === 5 && images.length > 6 && (
-                  <div className={cx("blur")}>+{images.length - 6}</div>
+                {index === 4 && images.length > 5 && (
+                  <div className={cx("blur")}>+{images.length - 5}</div>
                 )}
               </div>
             ))}

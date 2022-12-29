@@ -12,6 +12,7 @@ import ImagePreview from "../ImagePreview/ImagePreview";
 import HeadlessTippy from "@tippyjs/react/headless";
 import AddPost from "./AddPost";
 import styles from "./CreatePostPopup.module.scss";
+import { TextField } from "@mui/material";
 
 const postBackgrounds = [
   "../../../images/postBackgrounds/1.jpg",
