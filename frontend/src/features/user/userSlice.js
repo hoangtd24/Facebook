@@ -80,6 +80,8 @@ const userSlice = createSlice({
     builder.addCase(getListImage.rejected, (state, action) => {
       state.loading = false;
     });
+
+    //updateProfilePicture
     builder.addCase(updateProfilePicture.pending, (state, action) => {
       state.loading = true;
     });

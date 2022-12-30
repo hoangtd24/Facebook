@@ -1,8 +1,9 @@
 import { CircularProgress } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 import classNames from "classnames/bind";
 import Cookies from "js-cookie";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserAvatar } from "../../features/auth/authSlice";
@@ -19,6 +20,7 @@ function UpdateProfile({ setOpen, setChange }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
   const [text, setText] = useState("");
+  const [olderAvatar, setOlderAvatar] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
   const sliderRef = useRef(null);
@@ -26,6 +28,21 @@ function UpdateProfile({ setOpen, setChange }) {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
+  useEffect(() => {
+    const getOlderAvatar = async () => {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/getListImage`,
+        {
+          path: `${user.id}/profile_picture`,
+          sort: "desc",
+          max: "30",
+        }
+      );
+      setOlderAvatar(data.resources);
+    };
+    getOlderAvatar();
+  }, []);
+  console.log(olderAvatar);
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -105,7 +122,7 @@ function UpdateProfile({ setOpen, setChange }) {
     <div className={cx("wrapper")}>
       <div className={cx("popup_header")}>
         <span>Cập nhập ảnh đại diện</span>
-        <div className={cx("circle-icon")}>
+        <div className={cx("circle-icon")} onClick={() => setOpen(false)}>
           <i className={cx("exit_icon")}></i>
         </div>
       </div>
@@ -160,30 +177,49 @@ function UpdateProfile({ setOpen, setChange }) {
           </div>
         </div>
       ) : (
-        <div className={cx("actions")}>
-          <div
-            className={cx("upload-btn")}
-            onClick={() => inputRef.current.click()}
-          >
-            <i className={cx("plus_icon")}></i>
-            <span>Tải ảnh lên</span>
+        <>
+          <div className={cx("actions")}>
+            <div
+              className={cx("upload-btn")}
+              onClick={() => inputRef.current.click()}
+            >
+              <i className={cx("plus_icon")}></i>
+              <span>Tải ảnh lên</span>
+            </div>
+            <div className={cx("frame_btn")}>
+              <i className={cx("frame_icon")}></i>
+              <span>Thêm khung</span>
+            </div>
+            <input
+              type="file"
+              hidden
+              onChange={handlePreviewImage}
+              ref={inputRef}
+            />
           </div>
-          <div className={cx("frame_btn")}>
-            <i className={cx("frame_icon")}></i>
-            <span>Thêm khung</span>
-          </div>
-          <input
-            type="file"
-            hidden
-            onChange={handlePreviewImage}
-            ref={inputRef}
-          />
-        </div>
+          {olderAvatar.length > 0 && (
+            <div className={cx("suggest")}>
+              <div className={cx("suggest_header")}>Ảnh gợi ý</div>
+              <div className={cx("suggest_images")}>
+                {olderAvatar.slice(0, 6).map((img) => (
+                  <img
+                    src={img.url}
+                    alt=""
+                    key={img.asset_id}
+                    onClick={() => setImage(img.url)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </>
       )}
       {image.length > 0 && (
         <div className={cx("popup_footer")}>
           <div className={cx("popup_footer-actions")}>
-            <button className={cx("cancel_btn")}>Hủy</button>
+            <button className={cx("cancel_btn")} onClick={() => setImage("")}>
+              Hủy
+            </button>
             <Button primary onClick={() => updateProfile()}>
               Lưu
             </Button>

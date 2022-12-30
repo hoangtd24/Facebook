@@ -87,13 +87,17 @@ function Profile() {
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>
             <div
-              onClick={() => setOpen(true)}
               className={cx("profile_avatar")}
               style={{ backgroundImage: `url("${profile.picture}")` }}
             >
-              <div className={cx("profile_avatar-update")}>
-                <i className={cx("camera_filled_icon")}></i>
-              </div>
+              {profile._id === user.id && (
+                <div
+                  className={cx("profile_avatar-update")}
+                  onClick={() => setOpen(true)}
+                >
+                  <i className={cx("camera_filled_icon")}></i>
+                </div>
+              )}
             </div>
             <div className={cx("profile_name")}>
               <h1 className={cx("profile_username")}>{profile.username}</h1>
@@ -202,7 +206,7 @@ function Profile() {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style }}>
-            <UpdateProfile open={open} setOpen={setOpen} setChange={setChange}/>
+          <UpdateProfile open={open} setOpen={setOpen} setChange={setChange} />
         </Box>
       </Modal>
     </div>

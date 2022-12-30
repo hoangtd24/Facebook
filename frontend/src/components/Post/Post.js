@@ -84,25 +84,39 @@ function Post({ post }) {
         {post.background === "../../../images/postBackgrounds/0.jpg" ? (
           <>
             <span className={cx("post_content_text")}>{post.text}</span>
-            <div
-              className={cx(
-                "add_picture-content",
-                `grid_layout_${post.images.length < 6 ? post.images.length : 5}`
-              )}
-            >
-              {post.images.slice(0, 5).map((image, index) => {
-                return (
-                  <div className={cx("img-preview")} key={index}>
-                    <img src={image.url} key={index} />
-                    {index === 4 && post.images.length > 5 && (
-                      <div className={cx("blur")}>
-                        +{post.images.length - 5}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            {post.type === "profilePicture" ? (
+              <div className={cx("post_profile-wrap")}>
+                <div
+                  className={cx("post_profile-cover")}
+                  style={{ backgroundImage: `url("${post.user.cover}")` }}
+                ></div>
+                <div className={cx("post_profile-avatar")}>
+                  <img src={post.images[0].url} />
+                </div>
+              </div>
+            ) : (
+              <div
+                className={cx(
+                  "add_picture-content",
+                  `grid_layout_${
+                    post.images.length < 6 ? post.images.length : 5
+                  }`
+                )}
+              >
+                {post.images.slice(0, 5).map((image, index) => {
+                  return (
+                    <div className={cx("img-preview")} key={index}>
+                      <img src={image.url} key={index} />
+                      {index === 4 && post.images.length > 5 && (
+                        <div className={cx("blur")}>
+                          +{post.images.length - 5}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </>
         ) : (
           <div

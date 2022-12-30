@@ -15,7 +15,6 @@ function Home() {
   const { posts } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.auth);
   const [change, setChange] = useState(false);
-  console.log(posts)
   useEffect(() => {
     dispatch(getAllPost({ token: user.token }));
   }, [change]);
