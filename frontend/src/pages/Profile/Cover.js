@@ -42,7 +42,7 @@ function Cover({ profile }) {
             <span>Ảnh bìa của bạn hiển thị công khai</span>
           </div>
           <div className={cx("save_change-right")}>
-            <Button large onClick={() => setImage("")}>Hủy</Button>
+            {/* <Button large onClick={() => setImage("")}>Hủy</Button> */}
             <Button primary large>
               Lưu thay đổi
             </Button>
