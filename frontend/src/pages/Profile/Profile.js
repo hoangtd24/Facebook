@@ -16,6 +16,7 @@ import Post from "../../components/Post/Post";
 import Photos from "./Photos";
 import Friends from "./Friends";
 import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
+import Cover from "./Cover";
 
 const cx = classNames.bind(styles);
 const style = {
@@ -30,7 +31,6 @@ const style = {
 function Profile() {
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
-  const [visibleMenu, setVisibleMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const [change, setChange] = useState(false);
   const [gridView, setGridView] = useState(1);
@@ -41,48 +41,7 @@ function Profile() {
   }, [param.idUser, change]);
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("profile_cover")}>
-        <div className={cx("cover")}>
-          {profile.cover && (
-            <img src={profile.cover} className={cx("cover_img")} alt="" />
-          )}
-          {profile._id === user.id && (
-            <HeadlessTippy
-              visible={visibleMenu}
-              interactive
-              placement="bottom-end"
-              onClickOutside={() => setVisibleMenu(false)}
-              offset={[0, 2]}
-              render={(attrs) => (
-                <div className="box" tabIndex="-1" {...attrs}>
-                  <div className={cx("menu_update")}>
-                    <div className={cx("menu_update-item")}>
-                      <i className={cx("photo_icon")}></i>
-                      <p>Chọn ảnh</p>
-                    </div>
-                    <div className={cx("menu_update-item")}>
-                      <i className={cx("upload_icon")}></i>
-                      <p>Tải ảnh lên</p>
-                    </div>
-                    <div className={cx("menu_update-item")}>
-                      <i className={cx("photo_icon")}></i>
-                      <p>Chọn ảnh</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            >
-              <div
-                className={cx("update_cover-btn")}
-                onClick={() => setVisibleMenu(!visibleMenu)}
-              >
-                <i className={cx("camera_filled_icon")}></i>
-                <p>Chỉnh sửa ảnh bìa</p>
-              </div>
-            </HeadlessTippy>
-          )}
-        </div>
-      </div>
+      <Cover profile={profile} />
       <div className={cx("profile_infos")}>
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>

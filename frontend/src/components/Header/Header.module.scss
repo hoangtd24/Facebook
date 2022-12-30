@@ -167,6 +167,15 @@
   justify-content: center;
 }
 
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  .search {
+    padding: 12px;
+
+    & input {
+      display: none;
+    }
+  }
+}
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
   .header-middle {
     margin-left: auto;
@@ -175,7 +184,6 @@
   .middle-icon {
     width: 68px;
   }
-
   .search {
     padding: 12px;
 

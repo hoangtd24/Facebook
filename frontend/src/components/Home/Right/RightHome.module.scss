@@ -48,3 +48,15 @@
     display: none;
   }
 }
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  .wrapper {
+    width: fit-content;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .wrapper {
+    width: 300px;
+  }
+}
