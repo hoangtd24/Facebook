@@ -34,6 +34,27 @@ export const updateProfilePicture = createAsyncThunk(
     }
   }
 );
+
+export const updateCoverPicture = createAsyncThunk(
+  "updateCoverPicture",
+  async ({ url, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/updateCoverPicture`,
+        { url },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const getListImage = createAsyncThunk(
   "getListImage",
   async (param, { rejectWithValue }) => {

@@ -41,7 +41,7 @@ function Profile() {
   }, [param.idUser, change]);
   return (
     <div className={cx("wrapper")}>
-      <Cover profile={profile} />
+      <Cover profile={profile} setChange={setChange}/>
       <div className={cx("profile_infos")}>
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>

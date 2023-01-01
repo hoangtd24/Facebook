@@ -49,6 +49,9 @@ const authSlice = createSlice({
     updateUserAvatar: (state, action) => {
       state.user = action.payload;
     },
+    updateUserCover: (state, action) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (builder) => {
     //register
@@ -80,5 +83,5 @@ const authSlice = createSlice({
     });
   },
 });
-export const { logOut, updateUserAvatar } = authSlice.actions;
+export const { logOut, updateUserAvatar, updateUserCover } = authSlice.actions;
 export default authSlice.reducer;

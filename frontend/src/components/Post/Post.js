@@ -39,7 +39,7 @@ function Post({ post }) {
               </span>
               <span className={cx("post_type")}>
                 {post.type === "cover" &&
-                  `đã cập nhập ảnh bìa của ${
+                  ` đã cập nhập ảnh bìa của ${
                     post.user.gender === "male" ? "anh" : "cô"
                   } ấy`}
               </span>
