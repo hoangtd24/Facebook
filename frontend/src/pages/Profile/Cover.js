@@ -148,10 +148,7 @@ function Cover({ profile, setChange }) {
         </div>
       )}
       <input type="file" hidden onChange={handlePreviewImage} ref={inputRef} />
-      <div className={cx("cover")} ref={coverRef}>
-        {profile.cover && image === "" && (
-          <img src={profile.cover} className={cx("cover_img")} alt="" />
-        )}
+      <div className={cx("cover")} ref={coverRef} style={{backgroundImage: `url("${profile.cover}")`}}>
         {image && (
           <div className={cx("cover_cropper")}>
             <Cropper

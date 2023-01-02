@@ -77,3 +77,9 @@
     background-color: var(--bg-third);
   }
 }
+
+@media (max-width: 740px){
+  .comment_wrapper-text{
+    padding: 8px;
+  }
+}

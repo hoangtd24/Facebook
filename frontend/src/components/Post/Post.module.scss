@@ -494,3 +494,17 @@
     height: 500px;
   }
 }
+
+@media (max-width: 740px) {
+  .post_actions {
+    margin: 0;
+  }
+  .post_header {
+    align-items: flex-start;
+    padding: 4px 8px;
+  }
+  .dots_icon,
+  .add_exit-icon {
+    padding: 6px;
+  }
+}

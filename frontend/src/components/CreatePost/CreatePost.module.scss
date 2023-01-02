@@ -55,7 +55,7 @@
     padding: 0px;
     justify-content: center;
     & > span {
-      font-size: 11px;
+      font-size: 12px;
       background-color: transparent;
     }
 
@@ -63,6 +63,9 @@
       width: 16px;
       height: 16px;
     }
+  }
+  .create-post_wrap{
+    padding: 8px;
   }
 }
 

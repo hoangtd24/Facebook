@@ -39,3 +39,16 @@
   background-color: var(--bg-third);
   overflow: hidden;
 }
+
+@media (max-width: 740px) {
+  .wrapper{
+    padding: 0;
+  }
+  .name {
+    margin-left: 6px;
+  }
+
+  .circle-icon {
+    padding: 6px;
+  }
+}
