@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
       trim: true,
       text: true,
     },
-    
+
     email: {
       type: String,
       required: [true, "email is required"],
@@ -118,7 +118,6 @@ const userSchema = mongoose.Schema(
       },
       relationship: {
         type: String,
-        enum: ["Single", "In a relationship", "Married", "Divorced"],
       },
       instagram: {
         type: String,

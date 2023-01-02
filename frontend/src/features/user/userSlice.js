@@ -35,6 +35,26 @@ export const updateProfilePicture = createAsyncThunk(
   }
 );
 
+export const updateDetails = createAsyncThunk(
+  "updateDetails",
+  async ({ infos, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
+        { infos },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const updateCoverPicture = createAsyncThunk(
   "updateCoverPicture",
   async ({ url, token }) => {
@@ -81,6 +101,7 @@ const userSlice = createSlice({
     //getprofilr
     builder.addCase(getProfile.pending, (state, action) => {
       state.loading = true;
+      state.profile = {};
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
@@ -111,6 +132,10 @@ const userSlice = createSlice({
     });
     builder.addCase(updateProfilePicture.rejected, (state, action) => {
       state.loading = false;
+    });
+
+    builder.addCase(updateDetails.fulfilled, (state, action) => {
+      state.profile = action.payload;
     });
   },
 });

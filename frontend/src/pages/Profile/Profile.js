@@ -17,6 +17,7 @@ import Photos from "./Photos";
 import Friends from "./Friends";
 import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import Cover from "./Cover";
+import Intro from "../../components/Intro/Intro";
 
 const cx = classNames.bind(styles);
 const style = {
@@ -41,7 +42,7 @@ function Profile() {
   }, [param.idUser, change]);
   return (
     <div className={cx("wrapper")}>
-      <Cover profile={profile} setChange={setChange}/>
+      <Cover profile={profile} setChange={setChange} />
       <div className={cx("profile_infos")}>
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>
@@ -144,6 +145,7 @@ function Profile() {
       <div className={cx("profile_container")}>
         <div className={cx("profile_content")}>
           <div className={cx("profile_left")}>
+            <Intro details={profile.details} />
             <Photos path={profile._id} />
             <Friends path={profile._id} />
           </div>
