@@ -2,7 +2,6 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  justify-content: center;
   padding: 0 12px;
   height: 36px;
   cursor: pointer;
@@ -39,9 +38,13 @@
   display: flex;
   cursor: pointer;
   overflow: hidden;
-  filter: invert(100%);
 }
 
+.invert {
+  & img {
+    filter: invert(100%);
+  }
+}
 .primary {
   background-color: var(--blue-color);
   color: #fff;

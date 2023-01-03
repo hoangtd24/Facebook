@@ -15,6 +15,7 @@ function Button({
   src,
   primary,
   large,
+  invert,
   ...passProps
 }) {
   let Comp = "button";
@@ -34,7 +35,8 @@ function Button({
     [className]: className,
     auto,
     primary,
-    large
+    large,
+    invert,
   });
   return (
     <Comp className={classes} {...props}>

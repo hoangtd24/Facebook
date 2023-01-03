@@ -229,6 +229,7 @@
 .profile_left {
   width: 40%;
   border-radius: 10px;
+  height: fit-content;
 }
 
 .profile_right {
@@ -359,6 +360,49 @@
   border-radius: 4px;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.fix_scroll {
+  position: fixed;
+  bottom: 20px;
+  left: calc(12.5% + 32px);
+  width: calc(30% - 32px);
+}
+
+.custom {
+  margin-left: calc(40% + 8px);
+}
+
+.friendship {
+  display: flex;
+  gap: 10px;
+}
+
+.menu_friend {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px 0 var(--shadow-1);
+}
+.menu_friend-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  &:hover {
+    background-color: var(--bg-third);
+  }
+  & span {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(1px);
+  }
 }
 // tablet
 @media only screen and (min-width: 740px) and (max-width: 992px) {

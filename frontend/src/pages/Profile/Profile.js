@@ -1,23 +1,22 @@
-import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getProfile } from "../../features/user/userSlice";
-import HeadlessTippy from "@tippyjs/react/headless";
-import styles from "./Profile.module.scss";
-import Button from "../../components/Button/Button";
-import { Link, NavLink } from "react-router-dom";
-import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { Dots } from "../../svg";
+import Modal from "@mui/material/Modal";
+import classNames from "classnames/bind";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useParams } from "react-router-dom";
+import Button from "../../components/Button/Button";
 import CreatePost from "../../components/CreatePost/CreatePost";
-import GridView from "./GridView";
-import Post from "../../components/Post/Post";
-import Photos from "./Photos";
-import Friends from "./Friends";
-import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
-import Cover from "./Cover";
 import Intro from "../../components/Intro/Intro";
+import Post from "../../components/Post/Post";
+import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
+import { getProfile } from "../../features/user/userSlice";
+import { Dots } from "../../svg";
+import Cover from "./Cover";
+import Friends from "./Friends";
+import FriendShip from "./FriendShip";
+import GridView from "./GridView";
+import Photos from "./Photos";
+import styles from "./Profile.module.scss";
 
 const cx = classNames.bind(styles);
 const style = {
@@ -37,8 +36,14 @@ function Profile() {
   const [gridView, setGridView] = useState(1);
   const param = useParams();
   const dispatch = useDispatch();
+  console.log(profile);
   useEffect(() => {
-    dispatch(getProfile(param.idUser));
+    dispatch(
+      getProfile({
+        idUser: param.idUser,
+        token: user.token,
+      })
+    );
   }, [param.idUser, change]);
   return (
     <div className={cx("wrapper")}>
@@ -65,12 +70,18 @@ function Profile() {
             </div>
           </div>
           <div className={cx("profile_infos-right")}>
-            <Button src="../../../icons/plus.png" primary>
-              Thêm vào tin
-            </Button>
-            <Button icon="edit_icon" className={cx("edit_btn")}>
-              Chỉnh sửa trang cá nhân
-            </Button>
+            {profile._id === user.id ? (
+              <>
+                <Button src="../../../icons/plus.png" primary>
+                  Thêm vào tin
+                </Button>
+                <Button icon="edit_icon" className={cx("edit_btn")}>
+                  Chỉnh sửa trang cá nhân
+                </Button>
+              </>
+            ) : (
+              <FriendShip />
+            )}
           </div>
         </div>
         <div className={cx("divider")}></div>

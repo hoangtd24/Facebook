@@ -3,14 +3,19 @@ import axios from "axios";
 
 export const getProfile = createAsyncThunk(
   "getProfile",
-  async (param, { rejectWithValue }) => {
+  async ({ idUser, token }) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getProfile/${param}`
+        `${process.env.REACT_APP_BACKEND_URL}/getProfile/${idUser}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      console.log(error.response.data);
     }
   }
 );
