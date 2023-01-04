@@ -36,7 +36,6 @@ function Profile() {
   const [gridView, setGridView] = useState(1);
   const param = useParams();
   const dispatch = useDispatch();
-  console.log(profile);
   useEffect(() => {
     dispatch(
       getProfile({
@@ -72,7 +71,7 @@ function Profile() {
           <div className={cx("profile_infos-right")}>
             {profile._id === user.id ? (
               <>
-                <Button src="../../../icons/plus.png" primary>
+                <Button src="../../../icons/plus.png" primary invert>
                   Thêm vào tin
                 </Button>
                 <Button icon="edit_icon" className={cx("edit_btn")}>
@@ -80,7 +79,7 @@ function Profile() {
                 </Button>
               </>
             ) : (
-              <FriendShip />
+              <FriendShip friendship={profile?.friendship} id={param.idUser} />
             )}
           </div>
         </div>

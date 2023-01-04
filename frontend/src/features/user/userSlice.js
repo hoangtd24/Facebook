@@ -94,6 +94,138 @@ export const getListImage = createAsyncThunk(
     }
   }
 );
+
+export const addFriend = createAsyncThunk(
+  "addFriend",
+  async ({ id, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/addFriend/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const cancelRequest = createAsyncThunk(
+  "cancelRequest",
+  async ({ id, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/cancelRequest/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const acceptRequest = createAsyncThunk(
+  "acceptRequest",
+  async ({ id, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/acceptRequest/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteRequest = createAsyncThunk(
+  "deleteRequest",
+  async ({ id, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/deleteRequest/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const unfriend = createAsyncThunk("unfriend", async ({ id, token }) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/unfriend/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const follow = createAsyncThunk("follow", async ({ id, token }) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/follow/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const unfollow = createAsyncThunk("unfollow", async ({ id, token }) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/unfollow/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const userSlice = createSlice({
   name: "user/profile",
   initialState: {
