@@ -17,7 +17,7 @@ function Post({ post }) {
     <div className={cx("post")}>
       <div className={cx("post_header")}>
         <div className={cx("post_header-left")}>
-          <Link to={`profile/${post.user._id}`} className={cx("wrap-avatar")}>
+          <Link to={`/profile/${post.user._id}`} className={cx("wrap-avatar")}>
             <img
               src={post.user.picture}
               alt=""

@@ -16,7 +16,6 @@ function CreateComment() {
 
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
-    textRef.current.focus();
     textRef.current.addEventListener("input", (e) => {
       textRef.current.style.height = "auto";
       textRef.current.style.height = textRef.current.scrollHeight + 10 + "px";
@@ -56,6 +55,7 @@ function CreateComment() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+          {/* <div contentEditable>abc</div> */}
           <input type="file" hidden ref={imgRef} onChange={hanleChangeImg} />
           <HeadlessTippy
             visible={picker}

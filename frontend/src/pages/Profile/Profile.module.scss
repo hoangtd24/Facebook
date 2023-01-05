@@ -119,6 +119,7 @@
 
 .profile_infos-left {
   display: flex;
+  align-items: flex-start;
 }
 
 .profile_avatar {
@@ -152,11 +153,31 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 12px;
+  margin-top: 16px;
 }
 
 .profile_friends {
   font-weight: 500;
   color: var(--color-secondary);
+}
+
+.profile_friend-imgs {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profile_friend-link + .profile_friend-link {
+  margin-left: -8px;
+}
+
+.profile_friend-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--bg-secondary);
+  background-size: cover;
 }
 
 .profile_infos-right {
@@ -353,6 +374,18 @@
   grid-template-columns: repeat(3, 1fr);
   margin-top: 8px;
 }
+
+.profile_friends-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 8px;
+
+  & span {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
 .profile_photo-card {
   cursor: pointer;
   display: flex;
@@ -360,6 +393,10 @@
   border-radius: 4px;
   background-size: cover;
   background-repeat: no-repeat;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
 }
 
 .fix_scroll {
@@ -435,6 +472,7 @@
   }
   .profile_name {
     align-items: center;
+    margin: -16px 0 10px 0;
   }
   .profile_menu-item {
     padding: 16px 8px;
@@ -510,7 +548,7 @@
   }
   .profile_name {
     align-items: center;
-    margin-bottom: 20px;
+    margin: -16px 0 16px 0;
   }
   .divider {
     width: calc(100% - 32px);

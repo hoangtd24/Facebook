@@ -6,52 +6,52 @@ import PrivateOutlet from "./routes/PrivateOutlet";
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop>
-        <div className="App">
-          <Routes>
-            {publicRoutes.map((route, index) => {
-              const Page = route.component;
-              let Layout = DefaultLayout;
-              if (route.layout) {
-                Layout = route.layout;
-              }
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
+    <div className="App">
+      <Router>
+        {/* <ScrollToTop> */}
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            if (route.layout) {
+              Layout = route.layout;
+            }
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              />
+            );
+          })}
+          {privateRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            if (route.layout) {
+              Layout = route.layout;
+            }
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <PrivateOutlet>
                     <Layout>
                       <Page />
                     </Layout>
-                  }
-                />
-              );
-            })}
-            {privateRoutes.map((route, index) => {
-              const Page = route.component;
-              let Layout = DefaultLayout;
-              if (route.layout) {
-                Layout = route.layout;
-              }
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <PrivateOutlet>
-                      <Layout>
-                        <Page />
-                      </Layout>
-                    </PrivateOutlet>
-                  }
-                />
-              );
-            })}
-          </Routes>
-        </div>
-      </ScrollToTop>
-    </Router>
+                  </PrivateOutlet>
+                }
+              />
+            );
+          })}
+        </Routes>
+        {/* </ScrollToTop> */}
+      </Router>
+    </div>
   );
 }
 

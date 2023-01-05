@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import Intro from "../../components/Intro/Intro";
@@ -65,7 +65,20 @@ function Profile() {
             </div>
             <div className={cx("profile_name")}>
               <h1 className={cx("profile_username")}>{profile.username}</h1>
-              <p className={cx("profile_friends")}>235 bạn bè</p>
+              <p className={cx("profile_friends")}>
+                {profile.friends?.length} bạn bè
+              </p>
+              <div className={cx("profile_friend-imgs")}>
+                {profile.friends &&
+                  profile.friends.slice(0.8).map((friend) => (
+                    <Link to={`/profile/${friend._id}`} key={friend._id} className={cx("profile_friend-link")}>
+                      <div
+                        className={cx("profile_friend-img")}
+                        style={{ backgroundImage: `url("${friend.picture}")` }}
+                      ></div>
+                    </Link>
+                  ))}
+              </div>
             </div>
           </div>
           <div className={cx("profile_infos-right")}>
@@ -157,7 +170,7 @@ function Profile() {
           <div className={cx("profile_left")}>
             <Intro details={profile.details} />
             <Photos path={profile._id} />
-            <Friends path={profile._id} />
+            <Friends path={profile._id} friends={profile.friends} />
           </div>
           <div className={cx("profile_right")}>
             <CreatePost profile change={change} setChange={setChange} />

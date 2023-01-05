@@ -1,12 +1,12 @@
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getListImage } from "../../features/user/userSlice";
 import styles from "./Profile.module.scss";
 
 const cx = classNames.bind(styles);
-function Friends({ path }) {
+function Friends({ path, friends }) {
   const dispatch = useDispatch();
   const { listImage } = useSelector((state) => state.user);
   useEffect(() => {
@@ -28,17 +28,18 @@ function Friends({ path }) {
           Xem tất cả bạn bè
         </Link>
       </div>
-      <div className={cx("profile_card-grid")}>
-        {listImage.length > 0 &&
-          listImage
-            .slice(0, 9)
-            .map((img, index) => (
+      <div className={cx("profile_friends-grid")}>
+        {friends?.length > 0 &&
+          friends.slice(0, 9).map((friend, index) => (
+            <Link className={cx("friend_item")} to={`/profile/${friend._id}`} key={index}>
               <div
-                key={index}
+                key={friend._id}
                 className={cx("profile_photo-card")}
-                style={{ backgroundImage: `url("${img.url}")` }}
+                style={{ backgroundImage: `url("${friend.picture}")` }}
               ></div>
-            ))}
+              <span>{friend.username}</span>
+            </Link>
+          ))}
       </div>
     </div>
   );

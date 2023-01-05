@@ -219,8 +219,6 @@ exports.getProfile = async (req, res) => {
     const { idUser } = req.params;
     const user = await User.findById(req.user.id);
     const profile = await User.findById(idUser).select("-password");
-    console.log(user)
-    console.log(profile)
     const friendship = {
       friends: false,
       following: false,
@@ -230,7 +228,6 @@ exports.getProfile = async (req, res) => {
     if (!profile) {
       return res.json({ ok: false });
     }
-
     if (
       user.friends.includes(profile._id) &&
       profile.friends.includes(user._id)
@@ -249,6 +246,7 @@ exports.getProfile = async (req, res) => {
     const posts = await Post.find({ user: profile._id })
       .populate("user")
       .sort({ createdAt: -1 });
+    await profile.populate("friends", "username picture");
     return res.status(200).json({ ...profile.toObject(), posts, friendship });
   } catch (error) {
     return res.status(500).json({ message: error.message });
