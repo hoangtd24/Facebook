@@ -193,6 +193,31 @@
   padding: 12px 16px;
 }
 
+.react_count{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.react_count-img{
+  display: flex;
+
+  & img{
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.react_count-svg + .react_count-svg{
+  margin-left: -3px;
+}
+
+.react_count-num{
+  transform: translateY(-2px);
+  color: var(--color-secondary);
+
+}
+
 .comment_count {
   margin-left: auto;
   cursor: pointer;
@@ -222,6 +247,10 @@
   border-bottom: 1px solid var(--divider);
 }
 
+.react_icon {
+  width: 18px;
+  height: 18px;
+}
 .post_action {
   display: flex;
   flex: 1;
@@ -242,6 +271,43 @@
   }
 }
 
+.post_action-like {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  & span {
+    color: #4267b2;
+  }
+}
+
+.post_action-haha,
+.post_action-wow,
+.post_action-sad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  & span {
+    color: #f7b125;
+  }
+}
+
+.post_action-love {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  & span {
+    color: #f63459;
+  }
+}
+
+.post_action-angry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  & span {
+    color: #e4605a;
+  }
+}
 .react_popup {
   display: flex;
   gap: 4px;
@@ -249,6 +315,7 @@
   padding: 4px;
   border-radius: 99px;
   box-shadow: 0 1px 2px var(--shadow-1);
+  animation: fadeIn 0.2s linear;
 }
 
 .react {
@@ -506,5 +573,16 @@
   .dots_icon,
   .add_exit-icon {
     padding: 6px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(35px);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

@@ -7,12 +7,83 @@ import HeadlessTippy from "@tippyjs/react/headless";
 import { reacts } from "../../data/reacts";
 import CreateComment from "../Comment/CreateComment/CreateComment";
 import PostMenu from "./PostMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getReacts,
+  reactPost,
+  unreactPost,
+} from "../../features/post/postSlice";
+import PostCount from "./PostCount";
 
 const cx = classNames.bind(styles);
 
 function Post({ post }) {
   const [visiblePostMenu, setVisiblePostMenu] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const [check, setCheck] = useState("");
+  const [reactOfPost, setReactOfPost] = useState([]);
+  const dispatch = useDispatch();
+  const handleReact = (param) => {
+    setCheck(param.react);
+    const newReactPost = reactOfPost.filter((item) => item.reactBy !== user.id);
+    setReactOfPost([
+      {
+        react: param.react,
+        post: post._id,
+        reactBy: user.id,
+      },
+      ...newReactPost,
+    ]);
+    dispatch(reactPost(param));
+  };
+
+  const handleLike = () => {
+    if (check) {
+      setCheck("");
+      const newReactPost = reactOfPost.filter(
+        (item) => item.reactBy !== user.id
+      );
+      setReactOfPost(newReactPost);
+      dispatch(
+        unreactPost({
+          postId: post._id,
+          token: user.token,
+        })
+      );
+    } else {
+      setCheck("like");
+      setReactOfPost((prev) => [
+        ...prev,
+        {
+          react: "like",
+          post: post._id,
+          reactBy: user.id,
+        },
+      ]);
+      dispatch(
+        reactPost({
+          postId: post._id,
+          react: "like",
+          token: user.token,
+        })
+      );
+    }
+  };
+
+  useEffect(() => {
+    const getReactPost = async () => {
+      const result = await dispatch(
+        getReacts({
+          token: user.token,
+          postId: post._id,
+        })
+      );
+      setCheck(result.payload.check);
+      setReactOfPost(result.payload.reacts);
+    };
+    getReactPost();
+  }, []);
   return (
     <div className={cx("post")}>
       <div className={cx("post_header")}>
@@ -127,23 +198,27 @@ function Post({ post }) {
           </div>
         )}
       </div>
-      <div className={cx("post_infos")}>
-        <div className={cx("react_count")}>
-          <div className={cx("react_count-img")}></div>
-          <div className={cx("react_count-num")}></div>
-        </div>
-        <div className={cx("comment_count")}>4 bình luận</div>
-        <div className={cx("share_count")}>0 lượt chia sẻ</div>
-      </div>
+      <PostCount reactOfPost={reactOfPost}/>
       <div className={cx("post_actions")}>
         <HeadlessTippy
           interactive
           placement="top-start"
+          delay={[600, 300]}
           render={(attrs) => (
             <div className="box" tabIndex="-1" {...attrs}>
               <div className={cx("react_popup")}>
                 {reacts.map((react, index) => (
-                  <div className={cx("react")} key={index}>
+                  <div
+                    className={cx("react")}
+                    key={index}
+                    onClick={() =>
+                      handleReact({
+                        postId: post._id,
+                        react: react.title,
+                        token: user.token,
+                      })
+                    }
+                  >
                     <img src={react.icon} alt="" />
                     <div className={cx("react_name")}>{react.name}</div>
                   </div>
@@ -152,9 +227,33 @@ function Post({ post }) {
             </div>
           )}
         >
-          <div className={cx("post_action")}>
-            <i className={cx("like_icon")}></i>
-            <span>Thích</span>
+          <div className={cx("post_action")} onClick={() => handleLike()}>
+            {check ? (
+              <div className={cx(`post_action-${check}`)}>
+                <img
+                  src={`../../../reacts/${check}.svg`}
+                  className={cx("react_icon")}
+                />
+                <span>
+                  {check === "like"
+                    ? "Thích"
+                    : check === "haha"
+                    ? "Haha"
+                    : check === "wow"
+                    ? "Wow"
+                    : check === "love"
+                    ? "Yêu thích"
+                    : check === "sad"
+                    ? "Buồn"
+                    : "Phẫn nộ"}
+                </span>
+              </div>
+            ) : (
+              <>
+                <i className={cx("like_icon")}></i>
+                <span>Thích</span>
+              </>
+            )}
           </div>
         </HeadlessTippy>
         <div className={cx("post_action")}>
