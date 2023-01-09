@@ -4,8 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import EmojiPicker from "emoji-picker-react";
 import { useEffect, useRef, useState } from "react";
 import HeadlessTippy from "@tippyjs/react/headless";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { comment } from "../../../features/post/postSlice";
+import dataURItoBlob from "../../../helpers/dataURItoBlob";
+import { uploadImages } from "../../../features/upload/uploadSlice";
+
 const cx = classNames.bind(styles);
-function CreateComment() {
+function CreateComment({ post, setComments }) {
   const { user } = useSelector((state) => state.auth);
   const [cursorPosition, setCursorPosition] = useState();
   const [picker, setPicker] = useState(false);
@@ -13,13 +18,10 @@ function CreateComment() {
   const [imgPreview, setImgPreview] = useState("");
   const textRef = useRef(null);
   const imgRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
-    textRef.current.addEventListener("input", (e) => {
-      textRef.current.style.height = "auto";
-      textRef.current.style.height = textRef.current.scrollHeight + 10 + "px";
-    });
   }, [cursorPosition]);
 
   const handleClick = ({ emoji }) => {
@@ -33,6 +35,48 @@ function CreateComment() {
     setCursorPosition(start.length + emoji.length);
   };
 
+  const handleComment = async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (imgPreview !== "") {
+        const path = `${user.id}/upload_images`;
+        const commentImg = dataURItoBlob(imgPreview);
+        let formData = new FormData();
+        formData.append("path", path);
+        formData.append("file", commentImg);
+        const response = await dispatch(
+          uploadImages(formData, path, user.token)
+        );
+        const newComment = await dispatch(
+          comment({
+            postId: post._id,
+            text: text,
+            image: response.payload[0].url,
+            token: user.token,
+          })
+        );
+        setText("");
+        setImgPreview("");
+        setComments(newComment.payload);
+      } else {
+        if (text === "") {
+          return;
+        } else {
+          const newComment = await dispatch(
+            comment({
+              postId: post._id,
+              text: text,
+              image: imgPreview,
+              token: user.token,
+            })
+          );
+          setText("");
+          setImgPreview("");
+          setComments(newComment.payload);
+        }
+      }
+    }
+  };
   const hanleChangeImg = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -48,14 +92,15 @@ function CreateComment() {
           <img src={user.picture} alt="" />
         </div>
         <div className={cx("input_wrap")}>
-          <input
-            placeholder="Viết bình luận ..."
-            type="text"
+          <TextareaAutosize
+            size="small"
             ref={textRef}
+            placeholder="Viết bình luận ..."
             value={text}
             onChange={(e) => setText(e.target.value)}
+            className={cx("post_input")}
+            onKeyDown={(e) => handleComment(e)}
           />
-          {/* <div contentEditable>abc</div> */}
           <input type="file" hidden ref={imgRef} onChange={hanleChangeImg} />
           <HeadlessTippy
             visible={picker}

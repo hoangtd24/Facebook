@@ -61,7 +61,6 @@ export const unreactPost = createAsyncThunk(
   }
 );
 
-
 export const getReacts = createAsyncThunk(
   "post/getReacts",
   async ({ token, postId }) => {
@@ -75,6 +74,26 @@ export const getReacts = createAsyncThunk(
         }
       );
       return post.data;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+);
+
+export const comment = createAsyncThunk(
+  "post/comment",
+  async ({ token, ...data }) => {
+    try {
+      const comment = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/comment`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return comment.data;
     } catch (error) {
       return error.response.data.message;
     }

@@ -193,29 +193,28 @@
   padding: 12px 16px;
 }
 
-.react_count{
+.react_count {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.react_count-img{
+.react_count-img {
   display: flex;
 
-  & img{
+  & img {
     width: 18px;
     height: 18px;
   }
 }
 
-.react_count-svg + .react_count-svg{
+.react_count-svg + .react_count-svg {
   margin-left: -3px;
 }
 
-.react_count-num{
+.react_count-num {
   transform: translateY(-2px);
   color: var(--color-secondary);
-
 }
 
 .comment_count {
@@ -428,7 +427,19 @@
     border-radius: 50%;
   }
 }
-
+.see_more-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  cursor: pointer;
+  padding: 0 16px 4px 16px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+// .comment_wrapper {
+//   padding: 16px;
+// }
 @media only screen and (max-width: 740px) {
   .grid_layout_1 {
     & .img-preview:nth-child(1) {

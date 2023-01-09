@@ -15,6 +15,7 @@ import {
   unreactPost,
 } from "../../features/post/postSlice";
 import PostCount from "./PostCount";
+import CommentItem from "../Comment/CommentItem/CommentItem";
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,9 @@ function Post({ post }) {
   const { user } = useSelector((state) => state.auth);
   const [check, setCheck] = useState("");
   const [reactOfPost, setReactOfPost] = useState([]);
+  const [comments, setComments] = useState(post.comments);
+  const [seeMore, setSeeMore] = useState(false);
+
   const dispatch = useDispatch();
   const handleReact = (param) => {
     setCheck(param.react);
@@ -198,7 +202,7 @@ function Post({ post }) {
           </div>
         )}
       </div>
-      <PostCount reactOfPost={reactOfPost}/>
+      <PostCount reactOfPost={reactOfPost} post={post} />
       <div className={cx("post_actions")}>
         <HeadlessTippy
           interactive
@@ -265,7 +269,24 @@ function Post({ post }) {
           <span>Chia sẻ</span>
         </div>
       </div>
-      <CreateComment />
+      <CreateComment post={post} setComments={setComments} />
+      {comments.length > 1 && !seeMore && (
+        <p className={cx("see_more-btn")} onClick={() => setSeeMore(true)}>
+          Xem {comments.length - 1} bình luận trước
+        </p>
+      )}
+      <div className={cx("comment_wrapper")}>
+        {!seeMore
+          ? comments
+              .slice(-1)
+              .map((comment, index) => (
+                <CommentItem comment={comment} key={index} />
+              ))
+          : comments
+              .map((comment, index) => (
+                <CommentItem comment={comment} key={index} />
+              ))}
+      </div>
     </div>
   );
 }
