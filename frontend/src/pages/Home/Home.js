@@ -12,19 +12,18 @@ import styles from "./Home.module.scss";
 const cx = classNames.bind(styles);
 function Home() {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.auth);
-  const [change, setChange] = useState(false);
+  const { posts } = useSelector((state) => state.post);
   useEffect(() => {
     dispatch(getAllPost({ token: user.token }));
-  }, [change]);
+  }, []);
   return (
     <div className={cx("wrapper")}>
       <LeftHome />
       <div className={cx("container")}>
         <div className={cx("content")}>
           <Story />
-          <CreatePost setChange={setChange} change={change} />
+          <CreatePost />
           <div className={cx("posts")}>
             {posts.map((post, index) => (
               <Post key={index} post={post} />

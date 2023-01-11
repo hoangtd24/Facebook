@@ -2,11 +2,23 @@ import classNames from "classnames/bind";
 import styles from "./Post.module.scss";
 import PostMenuItem from "./PostMenuItem";
 import images from "../../assets/images";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePost } from "../../features/post/postSlice";
+import { deletePostProfile } from "../../features/user/userSlice";
 const cx = classNames.bind(styles);
-function PostMenu({ post }) {
+function PostMenu({ post, setVisiblePostMenu }) {
   const { user } = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
+  const handleDelete = async () => {
+    const result = await dispatch(
+      deletePost({
+        id: post._id,
+        token: user.token,
+      })
+    );
+    dispatch(deletePostProfile(result.payload));
+    setVisiblePostMenu(false);
+  };
   return (
     <div className={cx("post_menu")}>
       {post.user._id === user.id && (
@@ -60,6 +72,7 @@ function PostMenu({ post }) {
           icon="trash_icon"
           title="Chuyển vào thùng rác"
           subtitle="Các mục trong thùng rác sẽ bị xóa trong 30 ngày"
+          onClick={handleDelete}
         />
       )}
     </div>

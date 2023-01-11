@@ -32,7 +32,6 @@ function Profile() {
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
-  const [change, setChange] = useState(false);
   const [gridView, setGridView] = useState(1);
   const param = useParams();
   const dispatch = useDispatch();
@@ -43,10 +42,10 @@ function Profile() {
         token: user.token,
       })
     );
-  }, [param.idUser, change]);
+  }, [param.idUser]);
   return (
     <div className={cx("wrapper")}>
-      <Cover profile={profile} setChange={setChange} />
+      <Cover profile={profile} />
       <div className={cx("profile_infos")}>
         <div className={cx("profile_infos-wrap")}>
           <div className={cx("profile_infos-left")}>
@@ -71,7 +70,11 @@ function Profile() {
               <div className={cx("profile_friend-imgs")}>
                 {profile.friends &&
                   profile.friends.slice(0.8).map((friend) => (
-                    <Link to={`/profile/${friend._id}`} key={friend._id} className={cx("profile_friend-link")}>
+                    <Link
+                      to={`/profile/${friend._id}`}
+                      key={friend._id}
+                      className={cx("profile_friend-link")}
+                    >
                       <div
                         className={cx("profile_friend-img")}
                         style={{ backgroundImage: `url("${friend.picture}")` }}
@@ -173,7 +176,7 @@ function Profile() {
             <Friends path={profile._id} friends={profile.friends} />
           </div>
           <div className={cx("profile_right")}>
-            <CreatePost profile change={change} setChange={setChange} />
+            <CreatePost profile />
             <GridView setGridView={setGridView} gridView={gridView} />
             <div className={cx("profile_posts")}>
               {profile.posts?.map((post, index) => (
@@ -190,7 +193,7 @@ function Profile() {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style }}>
-          <UpdateProfile open={open} setOpen={setOpen} setChange={setChange} />
+          <UpdateProfile open={open} setOpen={setOpen} />
         </Box>
       </Modal>
     </div>

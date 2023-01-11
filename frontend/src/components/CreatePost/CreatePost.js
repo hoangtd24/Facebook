@@ -21,7 +21,7 @@ const style = {
   border: "none",
   outline: "none",
 };
-function CreatePost({ setChange, change, profile }) {
+function CreatePost({ profile }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -70,11 +70,7 @@ function CreatePost({ setChange, change, profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreatePostPopup
-            handleClose={handleClose}
-            setChange={setChange}
-            change={change}
-          />
+          <CreatePostPopup handleClose={handleClose} />
         </Box>
       </Modal>
     </div>

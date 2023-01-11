@@ -304,7 +304,7 @@ exports.addFriend = async (req, res) => {
           $push: { followers: sender._id },
         });
         await sender.updateOne({
-          $push: { following: sender._id },
+          $push: { following: receiver._id },
         });
         res.json({ message: "friend request has been sent" });
       } else {
@@ -335,7 +335,7 @@ exports.cancelRequest = async (req, res) => {
           $pull: { followers: sender._id },
         });
         await sender.updateOne({
-          $pull: { following: sender._id },
+          $pull: { following: receiver._id },
         });
         res.json({ message: "you successfully canceled request" });
       } else {

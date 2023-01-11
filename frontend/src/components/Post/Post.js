@@ -24,9 +24,8 @@ function Post({ post }) {
   const { user } = useSelector((state) => state.auth);
   const [check, setCheck] = useState("");
   const [reactOfPost, setReactOfPost] = useState([]);
-  const [comments, setComments] = useState(post.comments);
+  const [comments, setComments] = useState([]);
   const [seeMore, setSeeMore] = useState(false);
-
   const dispatch = useDispatch();
   const handleReact = (param) => {
     setCheck(param.react);
@@ -86,8 +85,9 @@ function Post({ post }) {
       setCheck(result.payload.check);
       setReactOfPost(result.payload.reacts);
     };
+    setComments(post.comments);
     getReactPost();
-  }, []);
+  }, [post]);
   return (
     <div className={cx("post")}>
       <div className={cx("post_header")}>
@@ -139,7 +139,7 @@ function Post({ post }) {
             offset={[-300, 0]}
             render={(attrs) => (
               <div className="box" tabIndex="-1" {...attrs}>
-                <PostMenu post={post} />
+                <PostMenu post={post} setVisiblePostMenu={setVisiblePostMenu} />
               </div>
             )}
           >
@@ -282,10 +282,9 @@ function Post({ post }) {
               .map((comment, index) => (
                 <CommentItem comment={comment} key={index} />
               ))
-          : comments
-              .map((comment, index) => (
-                <CommentItem comment={comment} key={index} />
-              ))}
+          : comments.map((comment, index) => (
+              <CommentItem comment={comment} key={index} />
+            ))}
       </div>
     </div>
   );

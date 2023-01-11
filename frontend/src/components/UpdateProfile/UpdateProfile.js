@@ -6,16 +6,22 @@ import Cookies from "js-cookie";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserAvatar } from "../../features/auth/authSlice";
+import {
+  updateAvatar,
+  updateProfilePicture,
+} from "../../features/auth/authSlice";
 import { createPost } from "../../features/post/postSlice";
 import { uploadImages } from "../../features/upload/uploadSlice";
-import { updateProfilePicture } from "../../features/user/userSlice";
+import {
+  addPostProfile,
+  updateProfileAvatar,
+} from "../../features/user/userSlice";
 import getCroppedImg from "../../helpers/getCroppedImg";
 import Button from "../Button/Button";
 import styles from "./UpdateProfile.module.scss";
 
 const cx = classNames.bind(styles);
-function UpdateProfile({ setOpen, setChange }) {
+function UpdateProfile({ setOpen }) {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
@@ -42,7 +48,6 @@ function UpdateProfile({ setOpen, setChange }) {
     };
     getOlderAvatar();
   }, []);
-  console.log(olderAvatar);
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -90,13 +95,14 @@ function UpdateProfile({ setOpen, setChange }) {
       formData.append("file", blob);
       setLoading(true);
       const res = await dispatch(uploadImages(formData, path, user.token));
-      const url = await dispatch(
+      await dispatch(
         updateProfilePicture({
           url: res.payload[0].url,
           token: user.token,
         })
       );
-      await dispatch(
+      dispatch(updateProfileAvatar(res.payload[0].url));
+      const result = await dispatch(
         createPost({
           type: "profilePicture",
           text: text,
@@ -106,14 +112,13 @@ function UpdateProfile({ setOpen, setChange }) {
           background: `../../../images/postBackgrounds/0.jpg`,
         })
       );
-      dispatch(updateUserAvatar({ ...user, picture: res.payload[0].url }));
+      dispatch(addPostProfile(result.payload.post));
       Cookies.set(
         "user",
         JSON.stringify({ ...user, picture: res.payload[0].url })
       );
       setLoading(false);
       setOpen(false);
-      setChange((prev) => !prev);
     } catch (error) {
       console.log(error);
     }

@@ -1,4 +1,4 @@
-import { Modal } from "@mui/material";
+import { LinearProgress, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import HeadlessTippy from "@tippyjs/react/headless";
 import axios from "axios";
@@ -8,10 +8,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
-import { updateUserCover } from "../../features/auth/authSlice";
+import { updateCoverPicture } from "../../features/auth/authSlice";
 import { createPost } from "../../features/post/postSlice";
 import { uploadImages } from "../../features/upload/uploadSlice";
-import { updateCoverPicture } from "../../features/user/userSlice";
+import {
+  addPostProfile,
+  updateProfileCover,
+} from "../../features/user/userSlice";
 import getCroppedImg from "../../helpers/getCroppedImg";
 import { Public } from "../../svg";
 import styles from "./Profile.module.scss";
@@ -27,7 +30,7 @@ const style = {
 };
 
 const cx = classNames.bind(styles);
-function Cover({ profile, setChange }) {
+function Cover({ profile }) {
   const { user } = useSelector((state) => state.auth);
   const [visibleMenu, setVisibleMenu] = useState(false);
   const [image, setImage] = useState("");
@@ -38,12 +41,14 @@ function Cover({ profile, setChange }) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const inputRef = useRef(null);
   const coverRef = useRef(null);
 
   useEffect(() => {
     setWidth(coverRef.current.clientWidth);
+    setHeight(coverRef.current.clientWidth / 3);
   }, [window.innerWidth]);
 
   useEffect(() => {
@@ -91,23 +96,24 @@ function Cover({ profile, setChange }) {
     [croppedAreaPixels]
   );
   //update cover
-  const updateCover = async () => {
+  const update = async () => {
     try {
+      setLoading(true);
       const img = await getCroppedImage();
       const blob = await fetch(img).then((b) => b.blob());
       const path = `${user.id}/cover_picture`;
       const formData = new FormData();
       formData.append("path", path);
       formData.append("file", blob);
-      setLoading(true);
       const res = await dispatch(uploadImages(formData, path, user.token));
+      dispatch(updateProfileCover(res.payload[0].url));
       const url = await dispatch(
         updateCoverPicture({
           url: res.payload[0].url,
           token: user.token,
         })
       );
-      await dispatch(
+      const result = await dispatch(
         createPost({
           type: "cover",
           text: "",
@@ -117,14 +123,13 @@ function Cover({ profile, setChange }) {
           background: `../../../images/postBackgrounds/0.jpg`,
         })
       );
-      dispatch(updateUserCover({ ...user, cover: res.payload[0].url }));
+      dispatch(addPostProfile(result.payload.post));
       Cookies.set(
         "user",
         JSON.stringify({ ...user, cover: res.payload[0].url })
       );
       setLoading(false);
       setImage("");
-      setChange((prev) => !prev);
     } catch (error) {
       console.log(error);
     }
@@ -133,6 +138,11 @@ function Cover({ profile, setChange }) {
     <div className={cx("profile_cover")}>
       {image.length > 0 && (
         <div className={cx("profile_cover-save")}>
+          {loading && (
+            <div className={cx("profile_cover-loading")}>
+              <LinearProgress />
+            </div>
+          )}
           <div className={cx("save_change-left")}>
             <Public width="20px" height="20px" />
             <span>Ảnh bìa của bạn hiển thị công khai</span>
@@ -141,21 +151,25 @@ function Cover({ profile, setChange }) {
             <Button large onClick={() => setImage("")}>
               Hủy
             </Button>
-            <Button primary large onClick={() => updateCover()}>
+            <Button primary large onClick={() => update()}>
               Lưu thay đổi
             </Button>
           </div>
         </div>
       )}
       <input type="file" hidden onChange={handlePreviewImage} ref={inputRef} />
-      <div className={cx("cover")} ref={coverRef} style={{backgroundImage: `url("${profile.cover}")`}}>
+      <div
+        className={cx("cover")}
+        ref={coverRef}
+        style={{ backgroundImage: `url("${profile.cover}")` }}
+      >
         {image && (
           <div className={cx("cover_cropper")}>
             <Cropper
               image={image}
               crop={crop}
               zoom={zoom}
-              aspect={width / 350}
+              aspect={width / height}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}

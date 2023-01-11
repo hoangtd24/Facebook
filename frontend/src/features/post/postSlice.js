@@ -21,6 +21,25 @@ export const createPost = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk(
+  "post/delete",
+  async ({ token, id }) => {
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/deletePost/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+);
+
 export const reactPost = createAsyncThunk(
   "post/react",
   async ({ token, ...data }) => {
@@ -130,7 +149,15 @@ const postSlice = createSlice({
     builder.addCase(createPost.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+      state.posts = [action.payload.post, ...state.posts];
     });
+
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      state.posts = state.posts.filter(
+        (post) => post._id !== action.payload._id
+      );
+    });
+
     builder.addCase(getAllPost.fulfilled, (state, action) => {
       state.posts = action.payload;
     });

@@ -9,7 +9,7 @@ import {
 import classNames from "classnames/bind";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateDetails } from "../../features/user/userSlice";
+import { updateDetails } from "../../features/auth/authSlice";
 import { Public } from "../../svg";
 import Button from "../Button/Button";
 import styles from "./Intro.module.scss";

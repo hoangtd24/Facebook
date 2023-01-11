@@ -20,66 +20,6 @@ export const getProfile = createAsyncThunk(
   }
 );
 
-export const updateProfilePicture = createAsyncThunk(
-  "updateProfilePicture",
-  async ({ url, token }) => {
-    try {
-      const { data } = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/updateProfilePicture`,
-        { url },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-export const updateDetails = createAsyncThunk(
-  "updateDetails",
-  async ({ infos, token }) => {
-    try {
-      const { data } = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
-        { infos },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-export const updateCoverPicture = createAsyncThunk(
-  "updateCoverPicture",
-  async ({ url, token }) => {
-    try {
-      const { data } = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/updateCoverPicture`,
-        { url },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
 export const getListImage = createAsyncThunk(
   "getListImage",
   async (param, { rejectWithValue }) => {
@@ -233,7 +173,26 @@ const userSlice = createSlice({
     listImage: [],
     loading: false,
   },
-  reducers: {},
+  reducers: {
+    addPostProfile: (state, action) => {
+      state.profile.posts = [action.payload, ...state.profile.posts];
+    },
+    deletePostProfile: (state, action) => {
+      state.profile.posts = state.profile.posts.filter(
+        (post) => post._id !== action.payload._id
+      );
+    },
+    updateProfileCover: (state, action) => {
+      state.profile.cover = action.payload;
+    },
+    updateProfileAvatar: (state, action) => {
+      state.profile.picture = action.payload;
+      state.profile.posts = state.profile.posts.map((post) => {
+        const user = { ...post.user, picture: action.payload };
+        return { ...post, user: user };
+      });
+    },
+  },
   extraReducers: (builder) => {
     //getprofilr
     builder.addCase(getProfile.pending, (state, action) => {
@@ -259,21 +218,12 @@ const userSlice = createSlice({
     builder.addCase(getListImage.rejected, (state, action) => {
       state.loading = false;
     });
-
-    //updateProfilePicture
-    builder.addCase(updateProfilePicture.pending, (state, action) => {
-      state.loading = true;
-    });
-    builder.addCase(updateProfilePicture.fulfilled, (state, action) => {
-      state.loading = false;
-    });
-    builder.addCase(updateProfilePicture.rejected, (state, action) => {
-      state.loading = false;
-    });
-
-    builder.addCase(updateDetails.fulfilled, (state, action) => {
-      state.profile = action.payload;
-    });
   },
 });
+export const {
+  addPostProfile,
+  deletePostProfile,
+  updateProfileAvatar,
+  updateProfileCover,
+} = userSlice.actions;
 export default userSlice.reducer;

@@ -34,6 +34,66 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const updateProfilePicture = createAsyncThunk(
+  "updateProfilePicture",
+  async ({ url, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/updateProfilePicture`,
+        { url },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const updateDetails = createAsyncThunk(
+  "updateDetails",
+  async ({ infos, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
+        { infos },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const updateCoverPicture = createAsyncThunk(
+  "updateCoverPicture",
+  async ({ url, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/updateCoverPicture`,
+        { url },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -45,12 +105,6 @@ const authSlice = createSlice({
   reducers: {
     logOut: (state, action) => {
       state.user = {};
-    },
-    updateUserAvatar: (state, action) => {
-      state.user = action.payload;
-    },
-    updateUserCover: (state, action) => {
-      state.user = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -81,7 +135,34 @@ const authSlice = createSlice({
       state.errorLogin = action.payload.message;
       state.loading = false;
     });
+
+    //updateProfilePicture
+    builder.addCase(updateProfilePicture.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateProfilePicture.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user.picture = action.payload;
+    });
+    builder.addCase(updateProfilePicture.rejected, (state, action) => {
+      state.loading = false;
+    });
+    //update cover
+    builder.addCase(updateCoverPicture.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateCoverPicture.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user.cover = action.payload;
+    });
+    builder.addCase(updateCoverPicture.rejected, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateDetails.fulfilled, (state, action) => {
+      state.profile = action.payload;
+    });
   },
 });
-export const { logOut, updateUserAvatar, updateUserCover } = authSlice.actions;
+export const { logOut, updateAvatar, updateCover } = authSlice.actions;
 export default authSlice.reducer;

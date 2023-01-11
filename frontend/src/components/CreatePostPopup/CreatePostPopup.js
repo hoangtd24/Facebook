@@ -13,6 +13,7 @@ import HeadlessTippy from "@tippyjs/react/headless";
 import AddPost from "./AddPost";
 import styles from "./CreatePostPopup.module.scss";
 import { TextField } from "@mui/material";
+import { addPostProfile } from "../../features/user/userSlice";
 
 const postBackgrounds = [
   "../../../images/postBackgrounds/1.jpg",
@@ -28,10 +29,9 @@ const postBackgrounds = [
 ];
 
 const cx = classNames.bind(styles);
-function CreatePostPopup({ handleClose, setChange, change }) {
+function CreatePostPopup({ handleClose }) {
   const { user } = useSelector((state) => state.auth);
-  const { loading } = useSelector((state) => state.post);
-  const { loadingUpload } = useSelector((state) => state.upload);
+  const [loading, setLoading] = useState(false);
   const [picker, setPicker] = useState(false);
   const [prev, setPrev] = useState(false);
   const [showBgs, setShowBgs] = useState(false);
@@ -62,6 +62,7 @@ function CreatePostPopup({ handleClose, setChange, change }) {
   };
 
   const handlePost = async () => {
+    setLoading(true);
     if (images.length > 0) {
       const path = `${user.id}/upload_images`;
       const postImages = images.map((image) => dataURItoBlob(image));
@@ -71,7 +72,7 @@ function CreatePostPopup({ handleClose, setChange, change }) {
         formData.append("file", image);
       });
       const response = await dispatch(uploadImages(formData, path, user.token));
-      await dispatch(
+      const result = await dispatch(
         createPost({
           type: null,
           text: text,
@@ -81,8 +82,9 @@ function CreatePostPopup({ handleClose, setChange, change }) {
           background: `../../../images/postBackgrounds/${currentBg}.jpg`,
         })
       );
+      dispatch(addPostProfile(result.payload.post));
     } else {
-      await dispatch(
+      const result = await dispatch(
         createPost({
           type: null,
           text: text,
@@ -91,8 +93,9 @@ function CreatePostPopup({ handleClose, setChange, change }) {
           background: `../../../images/postBackgrounds/${currentBg}.jpg`,
         })
       );
+      dispatch(addPostProfile(result.payload.post));
     }
-    setChange(!change);
+    setLoading(false);
     handleClose();
   };
   return (
@@ -275,11 +278,6 @@ function CreatePostPopup({ handleClose, setChange, change }) {
       >
         Đăng
       </button>
-      {loadingUpload && (
-        <div className={cx("loading")}>
-          <CircularProgress />
-        </div>
-      )}
       {loading && (
         <div className={cx("loading")}>
           <CircularProgress />
