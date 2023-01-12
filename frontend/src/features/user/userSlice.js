@@ -166,11 +166,89 @@ export const unfollow = createAsyncThunk("unfollow", async ({ id, token }) => {
   }
 });
 
+export const search = createAsyncThunk("search", async ({ value, token }) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/search/${value}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const addToSearchHistory = createAsyncThunk(
+  "addToSearchHistory",
+  async ({ searchUser, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/addToSearchHistory`,
+        { searchUser },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getSearchHistory = createAsyncThunk(
+  "getSearchHistory",
+  async ({ token }) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getSearchHistory`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteSearchHistory = createAsyncThunk(
+  "deleteSearchHistory",
+  async ({ idUser, token }) => {
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/deleteSearchHistory`,
+        { idUser },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user/profile",
   initialState: {
     profile: {},
     listImage: [],
+    searchResult: [],
+    searchHistory: [],
     loading: false,
   },
   reducers: {
@@ -191,6 +269,9 @@ const userSlice = createSlice({
         const user = { ...post.user, picture: action.payload };
         return { ...post, user: user };
       });
+    },
+    clearSearchResult: (state, action) => {
+      state.searchResult = [];
     },
   },
   extraReducers: (builder) => {
@@ -218,6 +299,22 @@ const userSlice = createSlice({
     builder.addCase(getListImage.rejected, (state, action) => {
       state.loading = false;
     });
+
+    //search
+
+    builder.addCase(search.fulfilled, (state, action) => {
+      state.searchResult = action.payload;
+    });
+    builder.addCase(getSearchHistory.pending, (state, action) => {
+      state.searchHistory = [];
+    });
+    builder.addCase(getSearchHistory.fulfilled, (state, action) => {
+      state.searchHistory = action.payload;
+    });
+
+    builder.addCase(deleteSearchHistory.fulfilled, (state, action) => {
+      state.searchHistory = action.payload;
+    });
   },
 });
 export const {
@@ -225,5 +322,6 @@ export const {
   deletePostProfile,
   updateProfileAvatar,
   updateProfileCover,
+  clearSearchResult,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -20,11 +20,12 @@ import {
   Watch,
   WatchActive,
 } from "../../svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { useState } from "react";
 import MenuList from "../Menu/Menu/Menu";
 import UserMenu from "../Menu/UserMenu/UserMenu";
+import { getSearchHistory } from "../../features/user/userSlice";
 const color = "#65676b";
 const cx = classNames.bind(styles);
 
@@ -33,37 +34,55 @@ function Header() {
   const [visibleSearchBox, setVisibleSearchBox] = useState(false);
   const [visibleMenu, setVisibleMenu] = useState(false);
   const [visibleMenuOnMobile, setVisibleMenuOnMobile] = useState(false);
-
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch();
 
   console.log(user);
   return (
     <header className={cx("header")}>
       <div className={cx("header-left")}>
-        <Link to="/" className={cx("header_logo")}>
-          <div className={cx("circle")}>
-            <Logo />
-          </div>
-        </Link>
         <HeadlessTippy
           visible={visibleSearchBox}
           interactive
-          getReferenceClientRect={() => ({
-            top: 268,
-            left: 0,
-          })}
+          offset={[-20, -50]}
+          placement="top-start"
           onClickOutside={() => setVisibleSearchBox(false)}
           render={(attrs) => (
             <div className="box" tabIndex="-1" {...attrs}>
-              <SearchBox color={color} />
+              <SearchBox
+                color={color}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                setVisibleSearchBox={setVisibleSearchBox}
+              />
             </div>
           )}
         >
-          <div
-            className={cx("search")}
-            onClick={() => setVisibleSearchBox(true)}
-          >
-            <Search color={color} />
-            <input type="text" placeholder="Tìm kiếm trên Facebook" />
+          <div className={cx("header_left-content")}>
+            <Link to="/" className={cx("header_logo")}>
+              <div className={cx("circle")}>
+                <Logo />
+              </div>
+            </Link>
+            <div
+              className={cx("search")}
+              onClick={() => {
+                setVisibleSearchBox(true);
+                dispatch(
+                  getSearchHistory({
+                    token: user.token,
+                  })
+                );
+              }}
+            >
+              <Search color={color} />
+              <input
+                type="text"
+                placeholder="Tìm kiếm trên Facebook"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </div>
           </div>
         </HeadlessTippy>
         <div className={cx("header-right_mobile")}>
@@ -163,7 +182,7 @@ function Header() {
           )}
         >
           <div
-            className={cx("circle-icon", {focus: visibleMenu})}
+            className={cx("circle-icon", { focus: visibleMenu })}
             onClick={() => setVisibleMenu(!visibleMenu)}
           >
             <Menu />

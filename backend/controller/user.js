@@ -496,3 +496,82 @@ exports.deleteRequest = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.search = async (req, res) => {
+  try {
+    const users = await User.find({ $text: { $search: req.params.value } })
+      .select("username picture")
+      .limit(5);
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.addToSearchHistory = async (req, res) => {
+  try {
+    const { searchUser } = req.body;
+    const search = {
+      user: searchUser,
+      createdAt: new Date(),
+    };
+    const user = await User.findById(req.user.id);
+    const check = user.search.find((x) => x.user.toString() === searchUser);
+    if (check) {
+      await User.updateOne(
+        {
+          _id: req.user.id,
+          "search._id": check._id,
+        },
+        {
+          $set: { "search.$.createdAt": new Date() },
+        }
+      );
+    } else {
+      await User.findByIdAndUpdate(req.user.id, {
+        $push: {
+          search,
+        },
+      });
+    }
+    res.json({ message: "ok" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getSearchHistory = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate(
+      "search.user",
+      "username picture"
+    );
+    user.search.sort((a, b) => b.createdAt - a.createdAt);
+    res.json(user.search);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deleteSearchHistory = async (req, res) => {
+  try {
+    const { idUser } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        $pull: {
+          search: {
+            user: idUser,
+          },
+        },
+      },
+      {
+        new: true,
+      }
+    ).populate("search.user", "username picture");
+    user.search.sort((a, b) => b.createdAt - a.createdAt);
+    res.json(user.search);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
