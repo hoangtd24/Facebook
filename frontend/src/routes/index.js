@@ -1,4 +1,5 @@
 import OnlyHeader from "../layout/OnlyHeader";
+import Friends from "../pages/Friends/Friends";
 import Groups from "../pages/Groups/Groups";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -18,6 +19,9 @@ const privateRoutes = [
   { path: "/groups", component: Groups, layout: OnlyHeader },
   { path: "/watch", component: Watch, layout: OnlyHeader },
   { path: "/market", component: Market, layout: OnlyHeader },
+  { path: "/market", component: Market, layout: OnlyHeader },
+  { path: "/friends", component: Friends, layout: OnlyHeader },
+  { path: "/friends/:name", component: Friends, layout: OnlyHeader },
 ];
 
 export { publicRoutes, privateRoutes };

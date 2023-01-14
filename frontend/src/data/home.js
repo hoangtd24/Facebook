@@ -4,6 +4,7 @@ export const left = [
   {
     text: "Bạn bè",
     img: images.friends,
+    to: "/friends",
   },
   {
     text: "Nhóm",
@@ -139,7 +140,7 @@ export const stories = [
     image: storyImages.user1,
   },
   {
-    profile_picture:storyImages.profile3,
+    profile_picture: storyImages.profile3,
     profile_name: "The Sopranos",
     image: storyImages.user3,
   },
@@ -149,7 +150,7 @@ export const stories = [
     image: storyImages.user4,
   },
   {
-    profile_picture:storyImages.profile5,
+    profile_picture: storyImages.profile5,
     profile_name: "The Witcher Wild Hunt",
     image: storyImages.user5,
   },

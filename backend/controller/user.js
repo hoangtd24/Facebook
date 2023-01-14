@@ -7,6 +7,7 @@ const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const Code = require("../models/Code");
 const generateCode = require("../helpers/generateCode");
 const Post = require("../models/Post");
+const { default: mongoose } = require("mongoose");
 exports.register = async (req, res) => {
   try {
     const {
@@ -571,6 +572,28 @@ exports.deleteSearchHistory = async (req, res) => {
     ).populate("search.user", "username picture");
     user.search.sort((a, b) => b.createdAt - a.createdAt);
     res.json(user.search);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getInfoFriendPage = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+      .populate("friends", "username picture")
+      .populate("requests", "username picture");
+    const sendRequests = await User.find({
+      requests: mongoose.Types.ObjectId(req.user.id),
+    }).select("username picture");
+    const allUsers = await User.find({});
+    const newArr = allUsers.filter((user) => user._id != req.user.id);
+    const info = {
+      friends: user.friends,
+      requests: user.requests,
+      sends: sendRequests,
+      people: newArr,
+    };
+    res.json(info);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -8,6 +8,9 @@ import {
   acceptRequest,
   addFriend,
   cancelRequest,
+  deleteRequest,
+  follow,
+  unfollow,
   unfriend,
 } from "../../features/user/userSlice";
 
@@ -50,7 +53,7 @@ function FriendShip({ friendship, id }) {
       following: false,
       friends: false,
     });
-    await dispatch(acceptRequest({ id: id, token: user.token }));
+    await dispatch(deleteRequest({ id: id, token: user.token }));
     setVisible(false);
   };
 
@@ -71,7 +74,7 @@ function FriendShip({ friendship, id }) {
       ...friend,
       following: true,
     });
-    await dispatch(unfriend({ id: id, token: user.token }));
+    await dispatch(follow({ id: id, token: user.token }));
     setVisible(false);
   };
 
@@ -80,7 +83,7 @@ function FriendShip({ friendship, id }) {
       ...friend,
       following: false,
     });
-    await dispatch(unfriend({ id: id, token: user.token }));
+    await dispatch(unfollow({ id: id, token: user.token }));
     setVisible(false);
   };
 
@@ -107,7 +110,7 @@ function FriendShip({ friendship, id }) {
                   {friend?.following ? (
                     <button
                       className={cx("menu_friend-item")}
-                      onClick={() => handleUnfollow}
+                      onClick={() => handleUnfollow()}
                     >
                       <img src="../../../icons/unfollowOutlined.png" alt="" />
                       <span>Bỏ theo dõi</span>

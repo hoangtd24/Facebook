@@ -23,7 +23,6 @@ function SearchBox({
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const param = useDebounce(searchValue, 500);
-  console.log(searchHistory);
   useEffect(() => {
     const handleSearch = async () => {
       inputRef.current.focus();

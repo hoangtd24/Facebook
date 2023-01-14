@@ -25,6 +25,7 @@ function LeftHome() {
                 name={item.text}
                 src={item.img}
                 className={cx("custom_img")}
+                to={item.to}
               />
             ))
           : left
@@ -35,6 +36,7 @@ function LeftHome() {
                   name={item.text}
                   src={item.img}
                   className={cx("custom_img")}
+                  to={item.to}
                 />
               ))}
         {seeMore ? (

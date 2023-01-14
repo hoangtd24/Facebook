@@ -242,6 +242,25 @@ export const deleteSearchHistory = createAsyncThunk(
   }
 );
 
+export const getInfoFriendPage = createAsyncThunk(
+  "getInfoFriendPage",
+  async ({ token }) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getInfoFriendPage`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user/profile",
   initialState: {
@@ -249,6 +268,10 @@ const userSlice = createSlice({
     listImage: [],
     searchResult: [],
     searchHistory: [],
+    friends: [],
+    requests: [],
+    sends: [],
+    people: [],
     loading: false,
   },
   reducers: {
@@ -272,6 +295,11 @@ const userSlice = createSlice({
     },
     clearSearchResult: (state, action) => {
       state.searchResult = [];
+    },
+    deletePeople: (state, action) => {
+      state.people = state.people.filter(
+        (person) => person._id !== action.payload.id
+      );
     },
   },
   extraReducers: (builder) => {
@@ -315,6 +343,13 @@ const userSlice = createSlice({
     builder.addCase(deleteSearchHistory.fulfilled, (state, action) => {
       state.searchHistory = action.payload;
     });
+
+    builder.addCase(getInfoFriendPage.fulfilled, (state, action) => {
+      state.friends = action.payload.friends;
+      state.requests = action.payload.requests;
+      state.sends = action.payload.sends;
+      state.people = action.payload.people;
+    });
   },
 });
 export const {
@@ -323,5 +358,6 @@ export const {
   updateProfileAvatar,
   updateProfileCover,
   clearSearchResult,
+  deletePeople,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -9,6 +9,7 @@ function ActionItem({
   href,
   onClick,
   auto,
+  active,
   className,
   icon,
   iconSvg,
@@ -37,15 +38,11 @@ function ActionItem({
   return (
     <Comp className={classes} {...props}>
       {icon && (
-        <span className={cx("circle-icon")}>
+        <span className={cx("circle-icon", { active })}>
           <i className={cx(icon)}></i>
         </span>
       )}
-      {iconSvg && (
-        <span className={cx("circle-icon")}>
-          {iconSvg}
-        </span>
-      )}
+      {iconSvg && <span className={cx("circle-icon")}>{iconSvg}</span>}
       {src && (
         <span className={cx("img")}>
           <img src={src} alt="" />
