@@ -4,6 +4,7 @@ import Groups from "../pages/Groups/Groups";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Market from "../pages/Market/Market";
+import PostDetail from "../pages/Post/PostDetail";
 import Profile from "../pages/Profile/Profile";
 import ForgetPassWord from "../pages/ResetPassword/forget/ForgetPassword";
 import Watch from "../pages/Watch/Watch";
@@ -22,6 +23,7 @@ const privateRoutes = [
   { path: "/market", component: Market, layout: OnlyHeader },
   { path: "/friends", component: Friends, layout: OnlyHeader },
   { path: "/friends/:name", component: Friends, layout: OnlyHeader },
+  { path: "/post/:id", component: PostDetail },
 ];
 
 export { publicRoutes, privateRoutes };

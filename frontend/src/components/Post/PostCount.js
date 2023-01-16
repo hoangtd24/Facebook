@@ -34,7 +34,7 @@ function PostCount({ reactOfPost, post }) {
         )}
       </div>
       <div className={cx("comment_count")}>
-        {post.comments.length > 0 ? post.comments.length : 0} bình luận
+        {post.comments?.length > 0 ? post.comments.length : 0} bình luận
       </div>
       <div className={cx("share_count")}>0 lượt chia sẻ</div>
     </div>

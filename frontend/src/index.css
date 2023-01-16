@@ -57,6 +57,10 @@ button {
   display: none;
 }
 
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

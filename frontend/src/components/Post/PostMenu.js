@@ -21,7 +21,7 @@ function PostMenu({ post, setVisiblePostMenu }) {
   };
   return (
     <div className={cx("post_menu")}>
-      {post.user._id === user.id && (
+      {post.user?._id === user.id && (
         <PostMenuItem icon="pin_icon" title="Ghim bài viết" />
       )}
       <PostMenuItem
@@ -29,30 +29,30 @@ function PostMenu({ post, setVisiblePostMenu }) {
         title="Lưu bài viết"
         subtitle="Thêm vào danh sách mục đã lưu"
       />
-      {post.user._id === user.id && (
+      {post.user?._id === user.id && (
         <PostMenuItem icon="edit_icon" title="Chỉnh sửa bài viết" />
       )}
-      {post.user._id !== user.id && (
+      {post.user?._id !== user.id && (
         <PostMenuItem
           icon="turnOnNotification_icon"
           title="Bật thông báo về bài viết này"
         />
       )}
-      {post.user._id !== user.id && (
+      {post.user?._id !== user.id && (
         <PostMenuItem
           image={images.hide}
           title="Ẩn bài viết"
           subtitle="Ẩn các bài viết tương tự"
         />
       )}
-      {post.user._id !== user.id && (
+      {post.user?._id !== user.id && (
         <PostMenuItem
           image={images.clock}
-          title={`Tạm ẩn ${post.user.first_name} trong 30 ngày`}
+          title={`Tạm ẩn ${post.user?.first_name} trong 30 ngày`}
           subtitle="Tạm thời dừng xem bài viết"
         />
       )}
-      {post.user._id === user.id && (
+      {post.user?._id === user.id && (
         <PostMenuItem
           icon="turnOffNotifications_icon"
           title="Tắt thông báo về bài viết này"
@@ -64,10 +64,10 @@ function PostMenu({ post, setVisiblePostMenu }) {
         subtitle="Tôi lo ngại về bài viết này"
       />
       <PostMenuItem icon="translate_icon" title="Tắt bản dịch" />
-      {post.user._id === user.id && (
+      {post.user?._id === user.id && (
         <PostMenuItem icon="archive_icon" title="Chuyển vào kho lưu trữ" />
       )}
-      {post.user._id === user.id && (
+      {post.user?._id === user.id && (
         <PostMenuItem
           icon="trash_icon"
           title="Chuyển vào thùng rác"

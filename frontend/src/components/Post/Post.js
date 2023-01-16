@@ -101,7 +101,7 @@ function Post({ post }) {
           </Link>
           <div className={cx("update_by")}>
             <div>
-              <Link to={`profile/${post.user._id}`}>
+              <Link to={`/profile/${post.user._id}`}>
                 <span className={cx("post_username")}>
                   {post.user.username}
                 </span>
@@ -157,7 +157,7 @@ function Post({ post }) {
       </div>
       <div className={cx("post_content")}>
         {post.background === "../../../images/postBackgrounds/0.jpg" ? (
-          <>
+          <Link to={`/post/${post._id}`}>
             <span className={cx("post_content_text")}>{post.text}</span>
             {post.type === "profilePicture" ? (
               <div className={cx("post_profile-wrap")}>
@@ -192,7 +192,7 @@ function Post({ post }) {
                 })}
               </div>
             )}
-          </>
+          </Link>
         ) : (
           <div
             className={cx("post_bg")}
