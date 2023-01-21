@@ -16,6 +16,7 @@ function ActionItem({
   rightIcon,
   name,
   src,
+  invert,
   ...passProps
 }) {
   let Comp = "button";
@@ -34,6 +35,7 @@ function ActionItem({
   const classes = cx("wrapper", {
     [className]: className,
     auto,
+    invert
   });
   return (
     <Comp className={classes} {...props}>

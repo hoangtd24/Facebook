@@ -1,7 +1,7 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/zoom";
@@ -17,6 +17,7 @@ import { useRef, useState } from "react";
 const cx = classNames.bind(styles);
 function PostLeft({ post }) {
   const inputRef = useRef();
+  const navigate = useNavigate();
   const [zoom, setZoom] = useState(1);
   const handleZoomIn = () => {
     inputRef.current.stepUp();
@@ -31,7 +32,7 @@ function PostLeft({ post }) {
     <div className={cx("post-left")}>
       <div className={cx("post-left-header")}>
         <div className={cx("post-left-exit")}>
-          <div className={cx("add_exit-icon")}>
+          <div className={cx("add_exit-icon")} onClick={() => navigate("/")}>
             <i className={cx("exit_icon")}></i>
           </div>
           <Link to="/" className={cx("header_logo")}>

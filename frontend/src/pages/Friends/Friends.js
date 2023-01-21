@@ -13,8 +13,8 @@ const cx = classNames.bind(styles);
 function Friends() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
   const { name } = useParams();
-  console.log(name);
   const { friends, requests, sends, people } = useSelector(
     (state) => state.user
   );
@@ -30,7 +30,7 @@ function Friends() {
       <div className={cx("friends_left")}>
         <div className={cx("friends_left-header")}>
           <span>Bạn bè</span>
-          <div className={cx("circle_icon")}>
+          <div className={cx("circle_icon", "invert")}>
             <i className={cx("settings_filled_icon")}></i>
           </div>
         </div>
@@ -39,6 +39,7 @@ function Friends() {
           name="Trang chủ"
           active
           to="/friends"
+          invert={theme === "dark"}
         />
         <ActionItem
           icon="friends_requests_icon"
@@ -46,6 +47,7 @@ function Friends() {
           rightIcon
           auto
           to="/friends/requests"
+          invert={theme === "dark"}
         />
         <ActionItem
           icon="friends_suggestions_icon"
@@ -53,6 +55,7 @@ function Friends() {
           rightIcon
           auto
           to="/friends/suggests"
+          invert={theme === "dark"}
         />
         <ActionItem
           icon="all_friends_icon"
@@ -60,13 +63,19 @@ function Friends() {
           rightIcon
           auto
           to="/friends/list"
+          invert={theme === "dark"}
         />
-        <ActionItem icon="birthdays_icon" name="Sinh nhật" />
+        <ActionItem
+          icon="birthdays_icon"
+          name="Sinh nhật"
+          invert={theme === "dark"}
+        />
         <ActionItem
           icon="all_friends_icon"
           name="Danh sách tùy chỉnh"
           rightIcon
           auto
+          invert={theme === "dark"}
         />
       </div>
       <div className={cx("friends_right")}>

@@ -48,7 +48,7 @@
   }
 }
 
-.post_type{
+.post_type {
   color: var(--color-secondary);
 }
 
@@ -390,15 +390,15 @@
   filter: invert(0.3);
   width: 20px;
 }
-.menu_item-description {
-}
 
 .menu_item-title {
   font-weight: 600;
+  color: var(--color-primary);
 }
 
 .menu_item-subtitle {
   font-size: 12px;
+  color: var(--color-primary);
 }
 
 .post_profile-wrap {
@@ -443,9 +443,16 @@
     text-decoration: underline;
   }
 }
-// .comment_wrapper {
-//   padding: 16px;
-// }
+
+.invert {
+  & i {
+    filter: invert(0.8);
+  }
+
+  & img {
+    filter: invert(0.8);
+  }
+}
 @media only screen and (max-width: 740px) {
   .grid_layout_1 {
     & .img-preview:nth-child(1) {

@@ -8,21 +8,23 @@ import ActionItem from "../../ActionItem/ActionItem";
 import styles from "./UserMenu.module.scss";
 import Cookies from "js-cookie";
 import { logOut } from "../../../features/auth/authSlice";
+import { setTheme } from "../../../features/theme/themeSlice";
 
 const cx = classNames.bind(styles);
 function UserMenu() {
   const { user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
   const [history, setHistory] = useState([{ data: userMenu }]);
   const [visibleUserMenu, setVisibleUserMenu] = useState(false);
   const current = history[history.length - 1];
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logOutUser = () => {
-    dispatch(logOut())
-    Cookies.set("user", "")
-    navigate("/login")
-  }
+    dispatch(logOut());
+    Cookies.set("user", "");
+    navigate("/login");
+  };
   return (
     <HeadlessTippy
       visible={visibleUserMenu}
@@ -39,7 +41,7 @@ function UserMenu() {
               {history.length > 1 ? (
                 <div className={cx("menu-heading")}>
                   <span
-                    className={cx("circle-icon")}
+                    className={cx("circle-icon", { invert: theme === "dark" })}
                     onClick={() =>
                       setHistory((prev) => prev.slice(0, prev.length - 1))
                     }
@@ -62,6 +64,7 @@ function UserMenu() {
                       rightIcon
                       auto
                       key={index}
+                      invert={theme === "dark"}
                       onClick={() => {
                         if (item.children) {
                           setHistory((prev) => [...prev, item.children]);
@@ -70,12 +73,36 @@ function UserMenu() {
                     />
                   );
                 } else {
-                  return (
-                    <ActionItem icon={item.icon} name={item.name} key={index} />
-                  );
+                  if (item.theme) {
+                    return (
+                      <ActionItem
+                        icon={item.icon}
+                        name={item.name}
+                        key={index}
+                        invert={theme === "dark"}
+                        onClick={() => dispatch(setTheme(item.theme))}
+                      />
+                    );
+                  } else {
+                    return (
+                      <ActionItem
+                        icon={item.icon}
+                        name={item.name}
+                        key={index}
+                        invert={theme === "dark"}
+                      />
+                    );
+                  }
                 }
               })}
-              {history.length === 1 && <ActionItem icon="logout_filled_icon" name="Đăng xuất" onClick={logOutUser}/>}
+              {history.length === 1 && (
+                <ActionItem
+                  icon="logout_filled_icon"
+                  name="Đăng xuất"
+                  invert={theme === "dark"}
+                  onClick={logOutUser}
+                />
+              )}
             </div>
           </div>
         </div>

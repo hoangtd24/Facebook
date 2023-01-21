@@ -31,6 +31,7 @@ const style = {
 function Profile() {
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
   const [open, setOpen] = useState(false);
   const [gridView, setGridView] = useState(1);
   const param = useParams();
@@ -55,7 +56,9 @@ function Profile() {
             >
               {profile._id === user.id && (
                 <div
-                  className={cx("profile_avatar-update")}
+                  className={cx("profile_avatar-update", {
+                    invert: theme === "dark",
+                  })}
                   onClick={() => setOpen(true)}
                 >
                   <i className={cx("camera_filled_icon")}></i>

@@ -10,6 +10,15 @@
     background-color: var(--bg-third);
   }
 }
+.invert {
+  & i {
+    filter: invert(0.8);
+  }
+
+  & img {
+    filter: invert(0.8);
+  }
+}
 
 .circle-icon {
   display: flex;
@@ -19,7 +28,7 @@
   background-color: var(--bg-third);
 }
 
-.active{
+.active {
   background-color: var(--blue-color);
 }
 .name {
@@ -45,7 +54,7 @@
 }
 
 @media (max-width: 740px) {
-  .wrapper{
+  .wrapper {
     padding: 0;
   }
   .name {

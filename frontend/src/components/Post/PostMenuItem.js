@@ -2,10 +2,10 @@ import classNames from "classnames/bind";
 import styles from "./Post.module.scss";
 
 const cx = classNames.bind(styles);
-function PostMenuItem({ icon, title, subtitle, image, onClick }) {
+function PostMenuItem({ icon, title, subtitle, image, onClick, invert }) {
   return (
     <div className={cx("menu_item")} onClick={onClick}>
-      <div className={cx("menu_item-icon", { custom: subtitle })}>
+      <div className={cx("menu_item-icon", { custom: subtitle }, {invert})}>
         {icon && <i className={cx(icon)}></i>}
         {image && <img src={image} alt="" className={cx("menu_item-img")} />}
       </div>

@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { useSelector } from "react-redux";
 import { create, menuList } from "../../../data/allMenu";
 import { Search } from "../../../svg";
 import ActionItem from "../../ActionItem/ActionItem";
@@ -8,6 +9,7 @@ import MenuItem from "./MenuItem";
 const color = "#65676b";
 const cx = classNames.bind(styles);
 function MenuList() {
+  const { theme } = useSelector((state) => state.theme);
   return (
     <div className={cx("wrapper")}>
       <p className={cx("menu-heading")}>Menu</p>
@@ -34,7 +36,7 @@ function MenuList() {
                 return <div className={cx("divider")} key={index}></div>;
               } else {
                 return (
-                  <ActionItem name={item.name} icon={item.icon} key={index} />
+                  <ActionItem name={item.name} icon={item.icon} key={index} invert={theme === "dark"}/>
                 );
               }
             })}

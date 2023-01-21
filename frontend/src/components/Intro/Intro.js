@@ -34,12 +34,11 @@ function Intro({ details }) {
   const [open, setOpen] = useState(false);
   const { profile } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
 
   useEffect(() => {
     setInfo(initial);
   }, [profile]);
-  // console.log("info", info);
-  // console.log("details", details);
   return (
     <div className={cx("profile_card")}>
       <div className={cx("profile_card-header")}>
@@ -67,43 +66,43 @@ function Intro({ details }) {
         </div>
       )}
       {details?.workplace && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/job.png" alt="" />
           <span>{`Làm việc tại ${details?.workplace}`}</span>
         </div>
       )}
       {details?.job && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/job.png" alt="" />
           <span>{details?.job}</span>
         </div>
       )}
       {details?.college && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/studies.png" alt="" />
           <span>{`Đã học tại ${details?.college}`}</span>
         </div>
       )}
       {details?.highSchool && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/studies.png" alt="" />
           <span>{`Đã học tại ${details?.highSchool}`}</span>
         </div>
       )}
       {details?.currentCity && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/home.png" alt="" />
           <span>{`Sống tại ${details?.currentCity}`}</span>
         </div>
       )}
       {details?.hometown && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/location.png" alt="" />
           <span>{`Đến từ ${details?.hometown}`}</span>
         </div>
       )}
       {details?.relationship && (
-        <div className={cx("info_item")}>
+        <div className={cx("info_item", { invert: theme === "dark" })}>
           <img src="../../../icons/relationship.png" alt="" />
           <span>{details?.relationship}</span>
         </div>

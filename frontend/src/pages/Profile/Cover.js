@@ -32,6 +32,7 @@ const style = {
 const cx = classNames.bind(styles);
 function Cover({ profile }) {
   const { user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
   const [visibleMenu, setVisibleMenu] = useState(false);
   const [image, setImage] = useState("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -214,7 +215,7 @@ function Cover({ profile }) {
             )}
           >
             <div
-              className={cx("update_cover-btn")}
+              className={cx("update_cover-btn", { invert: theme === "dark" })}
               onClick={() => setVisibleMenu(!visibleMenu)}
             >
               <i className={cx("camera_filled_icon")}></i>

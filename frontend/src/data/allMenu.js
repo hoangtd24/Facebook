@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import images from "../assets/images";
 export const menuList = [
   {
@@ -255,9 +256,11 @@ export const userMenu = [
             data: [
               {
                 name: "Tắt",
+                theme: "default",
               },
               {
                 name: "Bật",
+                theme: "dark",
               },
             ],
           },

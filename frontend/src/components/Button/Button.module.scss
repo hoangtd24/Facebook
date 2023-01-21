@@ -43,7 +43,11 @@
 
 .invert {
   & img {
-    filter: invert(100%);
+    filter: invert(0.8);
+  }
+
+  & i {
+    filter: invert(0.8);
   }
 }
 .primary {

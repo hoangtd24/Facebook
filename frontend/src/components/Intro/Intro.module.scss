@@ -212,6 +212,11 @@
 }
 
 
+.invert{
+  & img {
+    filter: invert(0.8);
+  }
+}
 @media (max-width: 740px){
   
 }
