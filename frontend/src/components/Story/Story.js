@@ -40,7 +40,7 @@ function Story() {
             />
           ))}
           <span className={cx("right-btn")}>
-            <ArrowRight color="#65676b" />
+            <ArrowRight />
           </span>
         </div>
         <Swiper

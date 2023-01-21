@@ -142,6 +142,7 @@ function UpdateProfile({ setOpen }) {
             margin="normal"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            sx={{ color: `var(--color-primary)` }}
           />
           <div className={cx("cropper")}>
             <Cropper

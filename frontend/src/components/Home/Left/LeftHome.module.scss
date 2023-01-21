@@ -21,7 +21,7 @@
 .home__left::-webkit-scrollbar-thumb {
   visibility: hidden;
   border-radius: 5px;
-  background-color: var(--divider);
+  background-color: var(--bg-third);
 }
 .custom_img {
   & > span {
@@ -32,7 +32,7 @@
 .divider {
   height: 1px;
   margin: 8px 0;
-  background-color: var(--shadow-1);
+  background-color: var(--divider);
 }
 
 .shortcuts-title {

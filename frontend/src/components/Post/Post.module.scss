@@ -40,11 +40,16 @@
 .post_username {
   font-size: 15px;
   font-weight: 600;
+  color: var(--color-primary);
 
   &:hover {
     text-decoration: underline;
     cursor: pointer;
   }
+}
+
+.post_type{
+  color: var(--color-secondary);
 }
 
 .update_at {
@@ -80,6 +85,7 @@
 .post_content_text {
   margin: 0px 16px 10px 16px;
   display: block;
+  color: var(--color-primary);
 }
 
 /// layout image
@@ -261,7 +267,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-third);
   }
   & span {
     color: var(--color-secondary);

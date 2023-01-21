@@ -20,6 +20,7 @@
 .profile_card-heading {
   font-size: 20px;
   font-weight: 700;
+  color: var(--color-primary);
 
   &:hover {
     text-decoration: underline;
@@ -37,6 +38,10 @@
     text-align: center;
   }
 }
+
+.bio_text{
+  color: var(--color-primary);
+}
 .custom_btn {
   width: 100%;
   justify-content: center;
@@ -53,6 +58,7 @@
   }
   & span {
     word-break: break-word;
+    color: var(--color-primary);
   }
 }
 
@@ -119,6 +125,7 @@
   font-size: 20px;
   font-weight: 700;
   border-bottom: 1px solid var(--bg-third);
+  color: var(--color-primary);
 }
 
 .circle-icon {

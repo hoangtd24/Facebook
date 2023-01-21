@@ -11,13 +11,14 @@
 .contact__header-left {
   font-size: 17px;
   font-weight: 600;
+  color: var(--color-primary);
 }
 
 .divider {
   display: block;
   height: 1px;
   margin: 16px 0 4px 0;
-  background-color: var(--shadow-1);
+  background-color: var(--divider);
 }
 
 .contact__header {

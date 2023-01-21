@@ -20,12 +20,13 @@
 .comment_text {
   padding: 8px 12px;
   border-radius: 16px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-third);
   width: fit-content;
   word-break: break-word;
 
   & span {
     font-size: 15px;
+    color: var(--color-secondary);
   }
 }
 
@@ -39,6 +40,7 @@
 .comment_user {
   font-size: 13px;
   font-weight: 600;
+  color: vaR(--color-primary);
   &:hover {
     text-decoration: underline;
   }
@@ -54,6 +56,7 @@ padding: 2px 8px;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
+    color: var(--color-primary);
 
     &:hover {
       text-decoration: underline;

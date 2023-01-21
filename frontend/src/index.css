@@ -14,13 +14,21 @@ a {
   color: inherit;
 }
 :root {
-  --bg-primary: #fff;
+  /* --bg-primary: #fff;
   --bg-secondary: #f0f2f5;
   --bg-third: #e4e6eb;
   --bg-forth: #f0f2f5;
   --color-primary: #050505;
   --color-secondary: #65676b;
-  --divider: #ced0d4;
+  --divider: #ced0d4; */
+  --bg-primary: #242526;
+  --bg-secondary: #18191A;
+  --bg-third: #3a3b3c;
+  --bg-forth: #3a3b3c;
+  --bg-fifth: #888888;
+  --color-primary: #e4e6eb;
+  --color-secondary: #b0b3b8;
+  --divider: rgb(62,64,66);
   --dark-bg-primary: #18191a;
   --dark-bg-secondary: #242526;
   --dark-bg-third: #3a3b3c;
@@ -36,6 +44,15 @@ a {
   --shadow-inset: rgba(255, 255, 255, 0.5);
 }
 
+html[data-theme="dark"] {
+  --bg-primary: #242526;
+  --bg-secondary: #18191a;
+  --bg-third: #3a3b3c;
+  --bg-forth: #3a3b3c;
+  --bg-fifth: #888888;
+  --color-primary: #e4e6eb;
+  --color-secondary: #b0b3b8;
+}
 /* hover */
 
 .hover1:hover {

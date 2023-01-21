@@ -86,6 +86,8 @@
   font-size: 16px;
   background-color: transparent;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-primary);
+  background-color: transparent;
 }
 @media (max-width: 740px){
   .comment_wrapper-text{

@@ -5,7 +5,7 @@
 .profile_cover {
   position: relative;
   width: 100%;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-third);
 }
 
 .profile_cover-save {
@@ -34,6 +34,7 @@
 
   & span {
     font-weight: 600;
+    color: var(--color-primary);
   }
 }
 .save_change-right {
@@ -80,6 +81,7 @@
     font-size: 15px;
     font-weight: 600;
     transform: translateY(-1px);
+    color: var(--color-primary);
   }
 }
 
@@ -108,12 +110,14 @@
     font-size: 15px;
     font-weight: 600;
     transform: translateY(-1px);
+    color: var(--color-primary);
   }
 }
 
 .profile_infos {
   position: relative;
   box-shadow: 0 1px 2px var(--shadow-1);
+  background-color: var(--bg-third);
 }
 
 .profile_infos-wrap {
@@ -163,6 +167,9 @@
   margin-top: 16px;
 }
 
+.profile_username {
+  color: var(--color-primary);
+}
 .profile_friends {
   font-weight: 500;
   color: var(--color-secondary);
@@ -229,13 +236,14 @@
 .title {
   font-size: 15px;
   font-weight: 500;
+  color: var(--color-secondary);
 }
 
 .dots_btn {
   display: flex;
   padding: 8px 16px;
   border-radius: 5px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   margin-left: auto;
   cursor: pointer;
   transform: translateY(-3px);
@@ -245,7 +253,7 @@
   display: flex;
   justify-content: center;
   padding-top: 16px;
-  background-color: var(--bg-third);
+  background-color: var(--bg-secondary);
 }
 
 .profile_content {
@@ -284,6 +292,7 @@
 .view_post-header {
   font-size: 20px;
   font-weight: 700;
+  color: var(--color-primary);
 }
 
 .view_post-actions {
@@ -355,6 +364,7 @@
 .profile_card-heading {
   font-size: 20px;
   font-weight: 700;
+  color: var(--color-primary);
 
   &:hover {
     text-decoration: underline;
@@ -391,6 +401,7 @@
   & span {
     font-size: 14px;
     font-weight: 600;
+    color: var(--color-secondary);
   }
 }
 .profile_photo-card {
@@ -600,6 +611,7 @@
 .suggest_header {
   font-size: 17px;
   font-weight: 700;
+  color: var(--color-primary);
 }
 
 .suggest_images {
@@ -643,6 +655,7 @@
   font-size: 20px;
   font-weight: 700;
   border-bottom: 1px solid var(--bg-third);
+  color: var(--color-primary);
 }
 
 .circle-icon {
