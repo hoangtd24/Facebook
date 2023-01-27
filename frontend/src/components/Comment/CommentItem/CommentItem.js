@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 import styles from "./CommentItem.module.scss";
 
 const cx = classNames.bind(styles);
@@ -9,7 +10,12 @@ function CommentItem({ comment }) {
       <img src={comment.commentBy.picture} alt="avatar_user_comment" />
       <div className={cx("comment_info")}>
         <div className={cx("comment_text")}>
-          <p className={cx("comment_user")}>{comment.commentBy.username}</p>
+          <Link
+            className={cx("comment_user")}
+            to={`/profile/${comment.commentBy._id}`}
+          >
+            {comment.commentBy.username}
+          </Link>
           <span>{comment.comment}</span>
         </div>
         {comment.image && (

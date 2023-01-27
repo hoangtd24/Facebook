@@ -20,6 +20,36 @@
   margin-top: 16px;
 }
 
+.no-post {
+  text-align: center;
+  & p {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  & span {
+    font-size: 16px;
+  }
+}
+
+.friends_right-header {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 0;
+  color: var(--color-primary);
+}
+
+.friends_right-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 -10px;
+}
+
+.loading{
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
 @media only screen and (max-width: 740px) {
   .container {
     margin-top: 60px;

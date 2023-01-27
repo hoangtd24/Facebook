@@ -112,60 +112,42 @@ function Profile() {
           >
             <span className={cx("title")}>Bài viết</span>
           </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/about`}
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
-            end
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Giới thiệu</span>
-          </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/friends`}
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
-            end
+          </Link>
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Bạn bè</span>
-          </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/photos`}
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
-            end
+          </Link>
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Ảnh</span>
-          </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/videos`}
-            end
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
+          </Link>
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Video</span>
-          </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/checkin`}
-            end
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
+          </Link>
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Check in</span>
-          </NavLink>
-          <NavLink
-            to={`/profile/${profile._id}/checkin`}
-            end
-            className={({ isActive }) =>
-              cx("profile_menu-item", { active: isActive })
-            }
+          </Link>
+          <Link
+            to={`/profile/${profile._id}`}
+            className={cx("profile_menu-item")}
           >
             <span className={cx("title")}>Xem thêm</span>
-          </NavLink>
+          </Link>
           <div className={cx("dots_btn")}>
             <Dots />
           </div>

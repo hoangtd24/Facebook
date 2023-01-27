@@ -3,10 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  acceptRequest,
-  addFriend,
-  cancelRequest,
-  deleteRequest,
+  cancelRequest
 } from "../../features/user/userSlice";
 import styles from "./Friends.module.scss";
 

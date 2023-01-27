@@ -10,7 +10,7 @@ import {
 import styles from "./Friends.module.scss";
 
 const cx = classNames.bind(styles);
-function AddFriendItem({ friend }) {
+function AddFriendItem({ friend, custom }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [sendRequests, setSendRequests] = useState(false);
@@ -25,7 +25,7 @@ function AddFriendItem({ friend }) {
   };
 
   return (
-    <div className={cx("grid_item")}>
+    <div className={cx("grid_item", { custom })}>
       <div className={cx("friend_item")}>
         <div
           className={cx("friend_item-img")}

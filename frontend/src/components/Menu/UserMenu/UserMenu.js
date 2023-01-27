@@ -52,7 +52,12 @@ function UserMenu() {
                 </div>
               ) : (
                 <div className={cx("user__info")}>
-                  <ActionItem src={user.picture} name={user.username} />
+                  <ActionItem
+                    src={user.picture}
+                    name={user.username}
+                    to={`/profile/${user.id}`}
+                    onClick={() => setVisibleUserMenu(false)}
+                  />
                 </div>
               )}
               {current.data.map((item, index) => {

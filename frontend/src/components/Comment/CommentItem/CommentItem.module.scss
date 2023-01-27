@@ -38,9 +38,10 @@
   background-repeat: no-repeat;
 }
 .comment_user {
+  display: block;
   font-size: 13px;
   font-weight: 600;
-  color: vaR(--color-primary);
+  color: var(--color-primary);
   &:hover {
     text-decoration: underline;
   }

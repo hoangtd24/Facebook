@@ -178,7 +178,13 @@ const postSlice = createSlice({
       );
     });
 
+    builder.addCase(getAllPost.pending, (state, action) => {
+      state.loading = true;
+      state.posts = action.payload;
+    });
+
     builder.addCase(getAllPost.fulfilled, (state, action) => {
+      state.loading = false;
       state.posts = action.payload;
     });
 
