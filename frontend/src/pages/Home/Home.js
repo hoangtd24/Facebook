@@ -16,10 +16,8 @@ const cx = classNames.bind(styles);
 function Home() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { posts, loading } = useSelector((state) => state.post);
-  const { friends, people, sends } = useSelector(
-    (state) => state.user
-  );
+  const { posts, loadingPost } = useSelector((state) => state.post);
+  const { friends, people, sends } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getAllPost({ token: user.token }));
@@ -36,7 +34,7 @@ function Home() {
         <div className={cx("content")}>
           <Story />
           <CreatePost />
-          {sends.length == 0 && friends.length == 0 && (
+          {!loadingPost && sends.length == 0 && friends.length == 0 && (
             <div className={cx("suggest_add-friend")}>
               <div className={cx("friends_right-header")}>
                 Những người bạn có thể biết
@@ -48,7 +46,7 @@ function Home() {
               </div>
             </div>
           )}
-          {loading ? (
+          {loadingPost ? (
             <div className={cx("loading")}>
               <CircularProgress />
             </div>

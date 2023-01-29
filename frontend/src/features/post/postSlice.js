@@ -156,6 +156,7 @@ export const getPost = createAsyncThunk(
 const postSlice = createSlice({
   name: "post",
   initialState: {
+    loadingPost: false,
     loading: false,
     message: "",
     posts: [],
@@ -179,12 +180,12 @@ const postSlice = createSlice({
     });
 
     builder.addCase(getAllPost.pending, (state, action) => {
-      state.loading = true;
+      state.loadingPost = true;
       state.posts = action.payload;
     });
 
     builder.addCase(getAllPost.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loadingPost = false;
       state.posts = action.payload;
     });
 

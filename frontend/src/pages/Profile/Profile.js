@@ -163,11 +163,13 @@ function Profile() {
           <div className={cx("profile_right")}>
             <CreatePost profile />
             <GridView setGridView={setGridView} gridView={gridView} />
-            <div className={cx("profile_posts")}>
-              {profile.posts?.map((post, index) => (
-                <Post key={index} post={post} />
-              ))}
-            </div>
+            {
+              <div className={cx("profile_posts")}>
+                {profile.posts?.map((post, index) => (
+                  <Post key={index} post={post} />
+                ))}
+              </div>
+            }
           </div>
         </div>
       </div>

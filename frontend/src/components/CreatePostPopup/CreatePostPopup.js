@@ -29,7 +29,7 @@ const postBackgrounds = [
 ];
 
 const cx = classNames.bind(styles);
-function CreatePostPopup({ handleClose }) {
+function CreatePostPopup({ setOpen }) {
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [picker, setPicker] = useState(false);
@@ -83,6 +83,7 @@ function CreatePostPopup({ handleClose }) {
         })
       );
       dispatch(addPostProfile(result.payload.post));
+      setOpen(false);
     } else {
       const result = await dispatch(
         createPost({
@@ -94,15 +95,15 @@ function CreatePostPopup({ handleClose }) {
         })
       );
       dispatch(addPostProfile(result.payload.post));
+      setOpen(false);
     }
     setLoading(false);
-    handleClose();
   };
   return (
     <div className={cx("popup_wrapper")}>
       <div className={cx("popup_header")}>
         <span>Tạo bài viết</span>
-        <div className={cx("circle-icon")} onClick={handleClose}>
+        <div className={cx("circle-icon")} onClick={() => setOpen(false)}>
           <i className={cx("exit_icon")}></i>
         </div>
       </div>

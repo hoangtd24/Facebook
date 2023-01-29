@@ -6,8 +6,6 @@ import styles from "./CreatePost.module.scss";
 import CreatePostPopup from "../CreatePostPopup/CreatePostPopup";
 import "tippy.js/dist/tippy.css";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 
@@ -70,7 +68,7 @@ function CreatePost({ profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreatePostPopup handleClose={handleClose} />
+          <CreatePostPopup setOpen = {setOpen} />
         </Box>
       </Modal>
     </div>
