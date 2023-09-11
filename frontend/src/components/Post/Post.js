@@ -92,30 +92,30 @@ function Post({ post }) {
     <div className={cx("post")}>
       <div className={cx("post_header")}>
         <div className={cx("post_header-left")}>
-          <Link to={`/profile/${post.user._id}`} className={cx("wrap-avatar")}>
+          <Link to={`/profile/${post?.user?._id}`} className={cx("wrap-avatar")}>
             <img
-              src={post.user.picture}
+              src={post?.user?.picture}
               alt=""
               className={cx("post_user-avatar")}
             />
           </Link>
           <div className={cx("update_by")}>
             <div>
-              <Link to={`/profile/${post.user._id}`}>
+              <Link to={`/profile/${post?.user?._id}`}>
                 <span className={cx("post_username")}>
-                  {post.user.username}
+                  {post?.user?.username}
                 </span>
               </Link>
               <span className={cx("post_type")}>
                 {post.type === "profilePicture" &&
                   ` đã cập nhập ảnh đại diện của ${
-                    post.user.gender === "male" ? "anh" : "cô"
+                    post?.user?.gender === "male" ? "anh" : "cô"
                   } ấy`}
               </span>
               <span className={cx("post_type")}>
                 {post.type === "cover" &&
                   ` đã cập nhập ảnh bìa của ${
-                    post.user.gender === "male" ? "anh" : "cô"
+                    post?.user?.gender === "male" ? "anh" : "cô"
                   } ấy`}
               </span>
             </div>
@@ -163,7 +163,7 @@ function Post({ post }) {
               <div className={cx("post_profile-wrap")}>
                 <div
                   className={cx("post_profile-cover")}
-                  style={{ backgroundImage: `url("${post.user.cover}")` }}
+                  style={{ backgroundImage: `url("${post?.user?.cover}")` }}
                 ></div>
                 <div className={cx("post_profile-avatar")}>
                   <img src={post.images[0].url} />
